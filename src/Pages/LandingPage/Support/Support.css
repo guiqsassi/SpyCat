@@ -1,0 +1,47 @@
+.Support{
+    height: 100vh;
+    width: 100%;
+    background: #FFD8E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.SupportContainer{
+    background-color: white;
+    width: 70%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+}
+.imagePaper{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+}
+.imagePaper img{
+    width: 500px;
+    height: 500px;
+}
+.imagePaper h2{
+    color: #4A2C36;
+text-align: center;
+font-family: Rowdies;
+font-size: 48px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+.Formulario{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+}
+.Formulario form{
+    gap: 20%;
+}

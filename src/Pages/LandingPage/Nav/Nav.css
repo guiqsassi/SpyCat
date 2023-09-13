@@ -9,6 +9,7 @@ header{
     position: fixed;
     gap: 20%;
     background-color: #FDFDFD;
+    z-index: 1;
 }
 .logo{
     width: 10%;

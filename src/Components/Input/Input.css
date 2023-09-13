@@ -1,0 +1,57 @@
+.InputContainer{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3%;
+}
+.InputContainer input{
+    width: 70%;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    border: 1px solid #4A2C36;
+
+
+}
+
+.InputContainer label{
+    color: #000;
+    margin-bottom: 1.5%;
+
+font-family: Open Sans;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 131.523%; /* 24.989px */
+}
+.InputContainer input:focus{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+.InputContainer textarea:focus{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+.InputContainer textarea{
+    width: 70%;
+    resize: none;
+    height: 200px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    border: 1px solid #4A2C36;
+
+
+}
+
+.InputContainer textarea::placeholder{
+    color: #000;
+font-family: Open Sans;
+/* font-size: 19px; */
+font-style: normal;
+}
+.InputContainer input::placeholder{
+    color: #000;
+font-family: Open Sans;
+/* font-size: 19px; */
+font-style: normal;
+}

@@ -1,4 +1,6 @@
 import "./Initial.css"
+
+import initialImage from "../../../images/ImageInitial.png"
 import Button from "../Button/Button"
 const Initial = () => {
     return(
@@ -9,12 +11,12 @@ const Initial = () => {
                 <p>Encontre pets abandonados ou perdidos e compartilhe para que outras pessoas também possam ajuda-los!!!</p>
                 <div className="buttons">
                     <button>Cadastre-se</button>
-                    <button>Contate-nos</button>
+                    <button className="about">Contate-nos</button>
                 </div>
             </div>
             </div>
             <div className="catImage">
-
+                <img src={initialImage}/>
             </div>
         </section>
     )
