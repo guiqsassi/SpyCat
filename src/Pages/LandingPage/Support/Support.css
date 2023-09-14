@@ -1,5 +1,5 @@
 .Support{
-    height: 100vh;
+    height: 80vh;
     width: 100%;
     background: #FFD8E5;
     display: flex;
@@ -22,8 +22,8 @@
     flex-direction: column;
 }
 .imagePaper img{
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
 }
 .imagePaper h2{
     margin: 0;

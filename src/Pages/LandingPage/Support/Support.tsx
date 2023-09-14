@@ -1,5 +1,6 @@
 import "./Support.css"
 import Input from "../../../Components/Input/Input"
+import ButtonForms from "../../../Components/ButtonForms/ButtonForms"
 import planeGuy from "../../../images/TorresGemeas.png"
 import { useState } from "react"
 const Support = ()=>{
@@ -19,6 +20,7 @@ const Support = ()=>{
                         <Input placeholder="Nome" value={name} setValue={setName} name={"Nome"}></Input>
                         <Input placeholder="Email" value={email} setValue={setEmail} name={"Email"}></Input>
                         <Input textArea={true} placeholder="Mensagem" value={message} setValue={setMessage} name={"Mensagem"}></Input>
+                        <ButtonForms name={"Enviar"}></ButtonForms>
                     </form>
                 </div>
             </div>

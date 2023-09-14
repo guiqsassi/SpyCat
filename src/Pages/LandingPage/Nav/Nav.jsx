@@ -1,6 +1,7 @@
 import "./Nav.css"
 import logo from "../../../images/logo.png"
 import Button from "../Button/Button"
+import { Link } from "react-router-dom"
 const Nav = ()=>{
     return (
         <header>
@@ -19,7 +20,9 @@ const Nav = ()=>{
                         Entre
                     </li>
                     <li>
-                        <Button name={"Cadastre-se"}></Button>
+                        <Link to={"/Cadastro"}>
+                            <Button name={"Cadastre-se"}></Button>
+                        </Link>
                     </li>
                 </ul>
             </div>
