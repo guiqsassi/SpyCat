@@ -37,6 +37,7 @@ bottom: 0;
     justify-content: center;
 }
 .OngImage img{
+    min-width: 400px;
     width: 80%;
     
 }
@@ -65,4 +66,13 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 margin: 10px 0 40px 0;
+}
+
+@media (max-width: 1250px) {
+    .OngText p{
+        font-size: 20px;
+    }
+    .OngText h1{
+        font-size: 40px;
+    }
 }

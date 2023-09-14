@@ -12,6 +12,7 @@ const Initial = () => {
                 <div className="buttons">
                     <button>Cadastre-se</button>
                     <button className="about">Contate-nos</button>
+                    
                 </div>
             </div>
             </div>

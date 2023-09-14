@@ -46,3 +46,11 @@ ul{
     width: 30%;
     min-width: 500px;
 }
+@media (max-height: 900px) {
+    .logo img{
+        max-width: 130px;
+    }
+    li{
+        font-size: 18;
+    }
+}

@@ -13,3 +13,12 @@ button{
     cursor: pointer;
     line-height: normal;
 }
+
+@media (max-height: 900px) {
+    button{
+        width: 110px;
+        height: 40px;
+        font-size: 18px;
+    }
+}
+
