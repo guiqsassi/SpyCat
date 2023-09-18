@@ -3,7 +3,7 @@ import "./ButtonForms.css"
 
 type ButtonFormsProps = {
     name: string,
-    onClick?: ()=> void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>)=> void;
 }
 
 const ButtonForms = (props: ButtonFormsProps)=>{
