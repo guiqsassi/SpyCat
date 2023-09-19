@@ -12,7 +12,6 @@ const Login = () =>{
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [message, setMessage] = useState("")
-    console.log("oi");
     
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -39,7 +38,7 @@ const Login = () =>{
             <Input icon={"https://i.postimg.cc/8CV7NZSr/Vector.png"} placeholder="Nome" value={name} setValue={setName} name={"Nome"}></Input>
             <Input password="password" placeholder="Senha" icon={"https://i.postimg.cc/MKNcrW35/cadeado.png"} value={message} setValue={setMessage} name={"Senha"}></Input>
             <div className="button">
-                <ButtonForms name="Cadastrar" onClick={handleClick}/>
+                <ButtonForms name="Logar" onClick={handleClick}/>
                 <p>Não possui um conta? <Link to={"/Cadastro"}>Clique aqui</Link></p>
             </div>
 

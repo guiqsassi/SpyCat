@@ -4,7 +4,7 @@ import Button from "../Button/Button"
 import { Link } from "react-router-dom"
 const Nav = ()=>{
     return (
-        <header>
+        <header className="navOutside">
             <div className="logo">
                 <img src={logo} />
             </div>
