@@ -12,7 +12,8 @@ const Login = () =>{
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [message, setMessage] = useState("")
-
+    console.log("oi");
+    
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {logged} = useSelector((rootReducer: RootState) => rootReducer.userReducer)
