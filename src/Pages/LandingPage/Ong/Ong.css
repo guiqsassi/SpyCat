@@ -13,6 +13,7 @@ bottom: 0;
 }
 .background svg{
     width: 100%;
+    clip-path:polygon(13px);
     height: 100%;
 }
 

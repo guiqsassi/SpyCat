@@ -1,4 +1,4 @@
-import Button from "../../Pages/LandingPage/Button/Button";
+import Button from "../Button/Button";
 import "./ButtonForms.css"
 
 type ButtonFormsProps = {

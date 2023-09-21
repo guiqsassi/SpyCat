@@ -8,6 +8,7 @@ import suporte from "../../images/suporte.png"
 import logOut from "../../images/logOut.png"
 import config from "../../images/config.png"
 import add from "../../images/add.png"
+import { useNavigate } from "react-router-dom";
 
 type NavProps = {
     image?: string,
@@ -15,6 +16,7 @@ type NavProps = {
 }
 
 const NavSlide = (props:NavProps)=>{
+    const navigate = useNavigate()
     const [slideView, setSlideView] = useState("-50vh")
 
     const handleClick = ()=>{
@@ -22,12 +24,15 @@ const NavSlide = (props:NavProps)=>{
         setSlideView("0vh"):
         setSlideView("-50vh")
     }
+    const handleClickLogo = ()=>{
+        navigate("/home")
+    }
     return (
         <div className="navContainer">
         <header className="navInside">
         <div className="navOptions">
         <BiMenu className="burguer" size={45} color="#3D1723" onClick={handleClick}></BiMenu>
-        <img src={Logo} className="logoImg" />
+        <img src={Logo} className="logoImg" onClick={handleClickLogo}/>
         </div>
         <div className="userOptions">
         <div className="localization">
