@@ -31,7 +31,7 @@ const NavSlide = (props:NavProps)=>{
         <div className="navContainer">
         <header className="navInside">
         <div className="navOptions">
-        <BiMenu className="burguer" size={45} color="#3D1723" onClick={handleClick}></BiMenu>
+        <BiMenu className="burguer" size={40} color="#3D1723" onClick={handleClick}></BiMenu>
         <img src={Logo} className="logoImg" onClick={handleClickLogo}/>
         </div>
         <div className="userOptions">

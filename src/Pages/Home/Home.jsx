@@ -11,6 +11,7 @@ import axios from "axios"
 const Home = ()=>{
 
     const [pets, setPets] = useState([{}])
+    
     useEffect(
         ()=>{
             axios.get("https://api.thecatapi.com/v1/images/search?limit=10").then(res=> setPets(res.data))
@@ -37,7 +38,7 @@ const Home = ()=>{
                     </div>
                 </div>
             </div>
-            <main>
+            <main className="content">
                 <div className="filter">
                     <div className="filterTittle">
                     <img src={filter} alt="" />

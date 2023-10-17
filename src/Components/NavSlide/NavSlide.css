@@ -1,6 +1,5 @@
 .navInside{
     width: 100%;
-    height: 7%;
     background-color: #FAFAFA;
     display: flex;
     z-index: 2;
@@ -30,6 +29,8 @@
 }
 .navContainer{
     width: 100%;
+    height: 6vh;
+
     position:sticky;
     top: 0;
     z-index: 1;

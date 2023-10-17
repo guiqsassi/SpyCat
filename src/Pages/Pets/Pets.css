@@ -8,13 +8,16 @@
 .petInfo{
     width: 100%;
     display: flex;
-    height: 93vh;
+    height: 90vh;
 }
 .imageSection {
     width: 50%;
-    height: 100%;
+    height: 90%;
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+    justify-content: start;
+    align-items: end;
+
 }
 .images{
     width: 100%;
@@ -27,7 +30,7 @@
 }
 .imageSection .imageCollunm{
     width: 20%;
-    min-height: 333px;
+    min-height: 300px;
 
     height: 75%;
     /* background-color: black; */
@@ -37,18 +40,20 @@
     justify-content: space-between;
 }
 .imageSection .bigImage{
-    width: 60%;
-    height: 75%;
-    display: flex;
-    align-items: end;
-    max-width: 500px;
-    min-height: 333px;
+    width: 54%; 
+     height: 100%; 
+     display: flex; 
+     align-items: end; 
+     max-width: 500px; 
+    min-height: 300px; 
 
 
 
 }
 .imageSection .bigImage img{
-    min-width: 500px;
+    max-height: 300px;
+    min-height: 300px;
+    max-width: 450px;
 }
 .imageCollunm img{
     max-width: 80%;
@@ -56,7 +61,7 @@
 }
 .petAbout{
     width: 50%;
-    height: 80%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,7 +71,7 @@
  width: 60%;
  height: 69%;
  min-height: 500px;
- background-color: #FAFAFA;   
+ background-color: #dfdfdf;
  
 }
 .campoTexto{
@@ -75,7 +80,15 @@ height: 45px;
 flex-shrink: 0;
 border-radius: 5px;
 background: #FFF;
-margin-bottom: 10%;
+margin-bottom: 2%;
+}
+.campoTextoDescricao{
+    width: 80%;
+    height: 150px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #FFF;
+    margin-bottom: 2%;
 }
 .bannerCotent{
     padding: 5% 0 0 5%;
@@ -87,4 +100,87 @@ font-size: 20px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+}
+.petData{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+}
+.petData p{
+    color: #F98AAE;
+font-family: Rowdies;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.favoritar img{
+    width: 32px;
+}
+.comentarios{
+    width: 60%;
+    min-height: 80vh;
+    margin-left: 10%;
+
+}
+.tittleComentarios{
+    width: 100%;
+    display: flex;
+    align-items: start;
+
+}
+.input label{
+    color: #4A2C36;
+font-family: Open Sans;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.lastMessage h4{
+    color: #4A2C36;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.tittleComentarios h3{
+    color: #F98AAE;
+text-align: center;
+font-family: Rowdies;
+font-size: 30px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+@media (max-width: 1300px) {
+    .imageSection{
+        width: 60%;
+    }
+    .petAbout{
+        width: 40%;
+    }
+    .infoBanner{
+        width: 90%;
+    }
+}
+@media (max-width: 1100px) {
+    .imageSection{
+        width: 70%;
+    }
+    .petAbout{
+        width: 30%;
+    }
+}
+.map{
+    margin-top: 2%;
+    width: 80%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
