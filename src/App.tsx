@@ -5,6 +5,7 @@ import Login from './Pages/Login/Login';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import Cadastro from './Pages/Cadastro/Cadastro';
 import Home from './Pages/Home/Home';
+import AddPet from './Pages/AddPet/AddPet';
 import PetsPage from './Pages/Pets/PetsPage';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path='/Login' element={<Login></Login>}/>
         <Route path='/' element={<Home></Home>}/>
         <Route path='/Pets' element={<PetsPage></PetsPage>}/>
+        <Route path='/AddPet' element={<AddPet></AddPet>}/>
       </Routes>
     </BrowserRouter>
   );
