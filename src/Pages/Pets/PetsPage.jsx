@@ -7,12 +7,13 @@ import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import "leaflet/dist/leaflet.css"
 import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L from "leaflet"
+import axios from "axios";
 
 const PetsPage = ()=>{
     const arrayImageCat = ["https://cdn.jwplayer.com/v2/media/OJGSRhSM/poster.jpg?width=720", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://assets-au-01.kc-usercontent.com/ab37095e-a9cb-025f-8a0d-c6d89400e446/9749fcd8-168c-4b1b-979c-f162c491b7c2/article-the-daily-activities-of-your-cat.jpg"]
     const [bigImage, setBigImage] = useState(arrayImageCat[0])
-    const [latitude, setLatitude] = useState()
-    const [longitude, setLongitude] = useState()
+    const [city, setCity] = useState("")
+    const [state, setState] = useState("")
     const [position, setPosition] = useState([-27.548258, -48.498994])
     const [markerPosition, setMarkerPosition] = useState(null)
     const markerIcon = new L.Icon({
@@ -35,19 +36,23 @@ const PetsPage = ()=>{
       } 
       const MapEvents = () => {
         useMapEvents({
-          click(e) {
+          click (e) {
             // setState your coords here
             // coords exist in "e.latlng.lat" and "e.latlng.lng"
             setMarkerPosition([e.latlng.lat, e.latlng.lng])
+            axios.post(`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&langCode=EN&location=${e.latlng.lng},${e.latlng.lat}`).then((res)=>{
+                setCity(res.data.address.City)
+                setState(res.data.address.Region)
+            })
             console.log(e.latlng.lat);
             console.log(e.latlng.lng);
-            console.log(markerPosition);
+            console.log(city);
            
           },
         });
         return markerPosition === null ? null : (
             <Marker icon={markerIcon} position={markerPosition}>
-              <Popup>You are here</Popup>
+              <Popup className="popup">{city} <br></br> {state}</Popup>
             </Marker>
           )
     }

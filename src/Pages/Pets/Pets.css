@@ -50,6 +50,9 @@
 
 
 }
+.popup{
+    text-align: center;
+}
 .imageSection .bigImage img{
     max-height: 300px;
     min-height: 300px;
