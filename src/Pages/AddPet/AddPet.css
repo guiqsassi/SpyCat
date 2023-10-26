@@ -8,7 +8,7 @@
 }
 .petCreateContainer{
     width: 70%;
-    min-height: 130vh;
+    /* min-height: 130vh; */
     display: flex;
     align-items: center;
 }
