@@ -73,10 +73,19 @@ line-height: 131.523%; /* 21.044px */
 .mapAdd{
     max-height: 250px;
     max-width: 350px;
-    z-index:0
+    z-index:0;
  }   
 .imagesMaps{
-    width: 50%;
+    width: 40%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+.uploadWidget{
+    margin-bottom: 100px;
 }
 .confirmButton{
     width: 100%;

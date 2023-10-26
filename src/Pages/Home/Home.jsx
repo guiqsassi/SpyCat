@@ -5,16 +5,18 @@ import Button from "../../Components/Button/Button"
 import filter from "../../images/filter.png"
 import PetView from "../../Components/PetView/PetView"
 import "./Home.css"
+import { UseSelector } from "react-redux/es/hooks/useSelector"
 import {useEffect, useState} from 'react';
 import axios from "axios"
-
+import { useNavigate } from "react-router-dom"
 const Home = ()=>{
 
     const [pets, setPets] = useState([{}])
+    const navigate = useNavigate()
     
     useEffect(
         ()=>{
-            axios.get("https://api.thecatapi.com/v1/images/search?limit=10").then(res=> setPets(res.data))
+            axios.get("http://192.168.15.79:8080/pets").then(res=> setPets(res.data))
         }
     ,[])
     return(
@@ -33,7 +35,9 @@ const Home = ()=>{
                             <p>{pets.length} animais</p>
                         </div>
                         <div className="cadNewPet">
-                            <button>Cadastrar novo pet</button>
+                            <button onClick={()=>{
+                                navigate("/addPet")
+                            }}> Cadastrar novo pet</button>
                         </div>
                     </div>
                 </div>
@@ -103,7 +107,7 @@ const Home = ()=>{
                 <div className="petsWrap">
                     {pets? pets.map((pet)=>{
                         return(
-                            <PetView image={pet.url}></PetView>
+                            <PetView image={pet.url} pet={pet}></PetView>
                         )
                     })
                     : null}

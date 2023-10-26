@@ -150,7 +150,7 @@ font-weight: 600;
     height: 100vh;
     display: flex;
     row-gap: 1%;
-    align-items: center;
+    /* align-items: center; */
     flex-wrap:wrap;
     flex-direction: row;
 

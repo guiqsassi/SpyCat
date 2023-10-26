@@ -44,6 +44,7 @@
      height: 100%; 
      display: flex; 
      align-items: end; 
+     justify-content: end;
      max-width: 500px; 
     min-height: 300px; 
 
@@ -56,7 +57,7 @@
 .imageSection .bigImage img{
     max-height: 300px;
     min-height: 300px;
-    max-width: 450px;
+    max-width: 500px;
 }
 .imageCollunm img{
     max-width: 80%;
@@ -126,7 +127,11 @@ line-height: normal;
     width: 60%;
     min-height: 80vh;
     margin-left: 10%;
+    margin-top: 5%;
 
+}
+.imgCollunmSon{
+    cursor: pointer;
 }
 .tittleComentarios{
     width: 100%;

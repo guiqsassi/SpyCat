@@ -5,6 +5,7 @@ import Logo from "../../images/logo.png"
 import home from "../../images/home.png"
 import fav from "../../images/fav.png"
 import suporte from "../../images/suporte.png"
+import { NavLink } from "react-router-dom";
 import logOut from "../../images/logOut.png"
 import config from "../../images/config.png"
 import add from "../../images/add.png"
@@ -36,30 +37,43 @@ const NavSlide = (props:NavProps)=>{
         </div>
         <div className="userOptions">
         <div className="localization">
-        <BiMap size={40} color="#F98AAE"></BiMap>
+        <BiMap size={35} color="#F98AAE"></BiMap>
         <p>Florianópolis - Sc</p>
         </div>
-        <BiUserCircle size={45} color="#F98AAE"></BiUserCircle>
+        <BiUserCircle size={40} color="#F98AAE"></BiUserCircle>
         </div>
         </header>
         <div className="slide" style={{transform:`translateX(${slideView})` }}>
             <nav>
                 <ul>
                     <li>
-                        <img src={home}/>
-                        <p>Home</p>
+                        <NavLink className={"navSlide"} to={"/home"}>
+                         <img src={home}/>
+                        <p>Home</p>   
+                        </NavLink>
+                        
                     </li>
                     <li>
+                    <NavLink className={"navSlide"} to={"/home"}>
+
                         <img src={fav}/>
                         <p>Salvos</p>
+                        </NavLink>
+
                     </li>
                     <li>
+                    <NavLink className={"navSlide"} to={"/addPet"}>
+
                         <img src={add}/>
                         <p>Adcionar Pet</p>
+                        </NavLink>
+
                     </li>
                     <li>
+                    <NavLink className={"navSlide"} to={"/suporte"}>
                         <img src={suporte}/>
                         <p>Suporte</p>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
@@ -67,12 +81,20 @@ const NavSlide = (props:NavProps)=>{
                 <hr />
                 <ul>
                     <li>
+                    <NavLink className={"navSlide"} to={"/config"}>
+
                     <img src={config}/>
                     <p>Configuraçoes</p>
+                    </NavLink>
+
                     </li>
                     <li>
+                    <NavLink className={"navSlide"} to={"/"}>
+
                     <img src={logOut}/>
                     <p>LogOut</p>
+                    </NavLink>
+
                     </li>
                 </ul>
             </div>
