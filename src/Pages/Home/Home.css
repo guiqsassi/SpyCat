@@ -155,10 +155,7 @@ font-weight: 600;
     flex-direction: row;
 
 }
-.petsWrap > *{
-    /* flex-basis: 33%; default value */
-    /* flex-grow: 0; */
-}
+
 @media (max-width: 1400px) {
     .pets{
         align-items: end;
