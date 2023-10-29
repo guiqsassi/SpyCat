@@ -5,9 +5,11 @@ import Logo from "../../images/logo.png"
 import home from "../../images/home.png"
 import fav from "../../images/fav.png"
 import suporte from "../../images/suporte.png"
+import { NavLink } from "react-router-dom";
 import logOut from "../../images/logOut.png"
 import config from "../../images/config.png"
 import add from "../../images/add.png"
+import { useNavigate } from "react-router-dom";
 
 type NavProps = {
     image?: string,
@@ -15,6 +17,7 @@ type NavProps = {
 }
 
 const NavSlide = (props:NavProps)=>{
+    const navigate = useNavigate()
     const [slideView, setSlideView] = useState("-50vh")
 
     const handleClick = ()=>{
@@ -22,39 +25,47 @@ const NavSlide = (props:NavProps)=>{
         setSlideView("0vh"):
         setSlideView("-50vh")
     }
+    const handleClickLogo = ()=>{
+        navigate("/home")
+    }
     return (
         <div className="navContainer">
         <header className="navInside">
         <div className="navOptions">
-        <BiMenu className="burguer" size={45} color="#3D1723" onClick={handleClick}></BiMenu>
-        <img src={Logo} className="logoImg" />
+        <BiMenu className="burguer" size={40} color="#3D1723" onClick={handleClick}></BiMenu>
+        <img src={Logo} className="logoImg" onClick={handleClickLogo}/>
         </div>
         <div className="userOptions">
         <div className="localization">
-        <BiMap size={40} color="#F98AAE"></BiMap>
+        <BiMap size={35} color="#F98AAE"></BiMap>
         <p>Florianópolis - Sc</p>
         </div>
-        <BiUserCircle size={45} color="#F98AAE"></BiUserCircle>
+        <BiUserCircle size={40} color="#F98AAE"></BiUserCircle>
         </div>
         </header>
         <div className="slide" style={{transform:`translateX(${slideView})` }}>
             <nav>
                 <ul>
                     <li>
-                        <img src={home}/>
-                        <p>Home</p>
+                        <NavLink className={"navSlide"} to={"/Home"}>
+                         <img src={home}/>
+                        <p>Home</p>   
+                        </NavLink>
+                        
                     </li>
                     <li>
-                        <img src={fav}/>
-                        <p>Salvos</p>
-                    </li>
-                    <li>
+                    <NavLink className={"navSlide"} to={"/addPet"}>
+
                         <img src={add}/>
                         <p>Adcionar Pet</p>
+                        </NavLink>
+
                     </li>
                     <li>
+                    <NavLink className={"navSlide"} to={"/suporte"}>
                         <img src={suporte}/>
                         <p>Suporte</p>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
@@ -62,12 +73,20 @@ const NavSlide = (props:NavProps)=>{
                 <hr />
                 <ul>
                     <li>
+                    <NavLink className={"navSlide"} to={"/User"}>
+
                     <img src={config}/>
-                    <p>Configuraçoes</p>
+                    <p>Perfil</p>
+                    </NavLink>
+
                     </li>
                     <li>
+                    <NavLink className={"navSlide"} to={"/"}>
+
                     <img src={logOut}/>
                     <p>LogOut</p>
+                    </NavLink>
+
                     </li>
                 </ul>
             </div>

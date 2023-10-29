@@ -1,6 +1,6 @@
 import "./Nav.css"
 import logo from "../../../images/logo.png"
-import Button from "../Button/Button"
+import Button from "../../../Components/Button/Button"
 import { Link } from "react-router-dom"
 const Nav = ()=>{
     return (

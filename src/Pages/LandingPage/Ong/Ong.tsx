@@ -1,5 +1,5 @@
 import "./Ong.css"
-import Button from "../Button/Button"
+import Button from "../../../Components/Button/Button"
 import OngImage from "../../../images/OngImage.png"
 
 

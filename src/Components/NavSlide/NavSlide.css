@@ -1,9 +1,9 @@
 .navInside{
-    width: 100;
-    height: 7%;
+    width: 100%;
     background-color: #FAFAFA;
     display: flex;
-
+    height: 6vh;
+    z-index: 2;
     justify-content: space-between;
 
 }
@@ -24,17 +24,21 @@
     cursor: pointer;
 }
 .logoImg{
-    max-width: 140px;
+    max-width: 120px;
+    cursor: pointer;
 
 }
 .navContainer{
     width: 100%;
-    position: fixed;
+    height: 6vh;
+
+    position:sticky;
+    top: 0;
     z-index: 1;
 }
 .navOptions{
-    min-width: 200px;
-    width: 11%;
+    min-width: 190px;
+    width: 5%;
     margin-left: 10px;
     display: flex;
     align-items: center;
@@ -67,6 +71,15 @@ line-height: normal;
     align-items: center;
     justify-content: start;
     gap: 5%;
+}
+.navSlide{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 5%;
+
 }
 .slide ul li:Hover{
     background-color: #dddddd;

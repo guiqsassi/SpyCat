@@ -5,15 +5,23 @@ import Login from './Pages/Login/Login';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import Cadastro from './Pages/Cadastro/Cadastro';
 import Home from './Pages/Home/Home';
+import AddPet from './Pages/AddPet/AddPet';
+import PetsPage from './Pages/Pets/PetsPage';
+import Suporte from './Pages/Suporte/Suporte';
+import User from './Pages/User/User';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/Home' element={<LandingPage></LandingPage>}/>
+        <Route path='/' element={<LandingPage></LandingPage>}/>
         <Route path='/Cadastro' element={<Cadastro></Cadastro>}/>
         <Route path='/Login' element={<Login></Login>}/>
-        <Route path='/' element={<Home></Home>}/>
+        <Route path='/Home' element={<Home></Home>}/>
+        <Route path='/Pets' element={<PetsPage></PetsPage>}/>
+        <Route path='/AddPet' element={<AddPet></AddPet>}/>
+        <Route path='/Suporte' element={<Suporte></Suporte>}/>
+        <Route path='/User' element={<User></User>}/>
       </Routes>
     </BrowserRouter>
   );

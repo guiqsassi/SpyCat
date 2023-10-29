@@ -1,7 +1,7 @@
 import "./Initial.css"
 
 import initialImage from "../../../images/ImageInitial.png"
-import Button from "../Button/Button"
+import Button from "../../../Components/Button/Button"
 const Initial = () => {
     return(
         <section className="Initial">

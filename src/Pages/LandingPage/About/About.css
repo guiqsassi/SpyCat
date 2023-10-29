@@ -4,6 +4,7 @@ li img{
 }
 li{
     display: flex;
+    align-items: center;
     flex-direction: column;
 
 }
@@ -36,7 +37,7 @@ li h2{
 }
 @media (max-height: 900px) {
     li img{
-        max-width: 250px;
+        max-width: 200px;
     }
     li h2{
         font-size: 16;
@@ -44,7 +45,7 @@ li h2{
 }
 @media (max-height: 700px) {
     li img{
-        max-width: 210px;
+        max-width: 150px;
     }
     li h2{
         font-size: 12;
