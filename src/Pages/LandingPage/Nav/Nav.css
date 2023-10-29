@@ -35,6 +35,18 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
+.navLink{
+    color: #4A2C36;
+    font-family: Rowdies;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .nav ul{
     display: flex;
     gap: 60px;

@@ -29,22 +29,17 @@ const UploadWidget = () => {
 
     return ( 
         <>
-        {resImg?
-        <img src={resImg} className="resImg" alt="" />
-        :
-        <form className="file">
+        <form className="file" style={resImg?  {backgroundImage: `url(${resImg}`} : null }>
         
-        <input type="file" className="upload" onChange={(e)=>{
+        <input type="file"  className="upload" onChange={(e)=>{
             uploadImage(e.target.files)
         }}/>
         <div className="formCenter">
-        <label className="labelUpload"> Enviar imagem</label>
+        <label className="labelUpload" style={resImg?  {color: "white"} : null }> Enviar imagem</label>
         <img src={add} className="addImg" />
         </div>
         </form>
 
-
-}
        
 
         </>

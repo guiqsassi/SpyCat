@@ -9,7 +9,7 @@ type ButtonFormsProps = {
 const ButtonForms = (props: ButtonFormsProps)=>{
     return(
         <>
-        <button onClick={props.onClick} className="ButtonForms">{props.name}</button>
+        <button type={"submit"} value={"Send"} onClick={props.onClick} className="ButtonForms">{props.name}</button>
         </>
     )
 }

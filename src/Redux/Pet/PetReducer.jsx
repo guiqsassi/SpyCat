@@ -1,6 +1,6 @@
 
 const initialState = {
-    url:"a",
+    url:"",
     pet: {}
 }
 

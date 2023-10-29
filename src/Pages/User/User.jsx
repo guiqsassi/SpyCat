@@ -71,9 +71,11 @@ const User = () => {
 
             console.log(resposta);
             resposta.map((municipio)=>{
-                        setCidades([...cidades, municipio.nome ])
-                        console.log(municipio.nome);
-                        
+                if(!cidades.includes(municipio.microrregiao.nome))(
+                        setCidades((prev) =>  [...prev, municipio.nome ])
+
+                )
+                // setCidades([...cidades, municipio.microrregiao.nome])
             })
         })
     }

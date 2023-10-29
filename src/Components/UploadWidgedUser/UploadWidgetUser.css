@@ -7,15 +7,18 @@
 .upload:hover{
     cursor: pointer;
 }
-.file{
-    height: 200px;
-    width: 350px;
+.fileUser{
+    height: 150px;
+    width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 2px dashed #F98AAE;
     border-radius: 100%;
     position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .labelUpload{
 
@@ -30,8 +33,10 @@ line-height: 131.523%; /* 18.413px */
 }
 .resImg{
     border: 2px dashed #F98AAE;
-    height: 200px;
-    width: 350px;
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+
     
 }
 .formCenter{

@@ -2,7 +2,7 @@ import "./AddPet.css"
 import NavSlide from "../../Components/NavSlide/NavSlide";
 import Input from "../../Components/Input/Input";
 import "leaflet/dist/leaflet.css"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import UploadWidget from "../../Components/UploadWidged/UploadWidget";
 import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L from "leaflet"
@@ -10,14 +10,21 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import { useSelector } from "react-redux";
+import Select from "../../Components/Select/Select";
 const AddPet = () => {
   const navigate = useNavigate()
     const [position, setPosition] = useState([-27.548258, -48.498994])
     const [markerPosition, setMarkerPosition] = useState(null)
     const [description, setDescription] = useState("")
-    const [characteristics, setCharacteristics] = useState("")
+    const [especie, setEspecie] = useState("")
+    const [Cor, setCor] = useState("")
+    const [email, setEmail] = useState("")
+    const [telefone, setTelefone] = useState("")
+    const [perdido, setPerdido] = useState("")
+    const [abandonado, setAbandonado] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
+    const [type, setType] = useState("")
     const petUrl = useSelector(state=> state.petReducer)
     const markerIcon = new L.Icon({
         iconUrl: require("../../images/locator.png"),
@@ -47,6 +54,7 @@ const AddPet = () => {
             axios.post(`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&langCode=EN&location=${e.latlng.lng},${e.latlng.lat}`).then((res)=>{
                 setCity(res.data.address.City)
                 setState(res.data.address.Region)
+                setType(res.data.address.Type);
             })
             console.log(e.latlng.lat);
             console.log(e.latlng.lng);
@@ -62,21 +70,17 @@ const AddPet = () => {
     }
 
     const handleClick = async()=>{
-      console.log(characteristics);
-      console.log(description);
-      console.log(city);
-      console.log(state);
-      console.log(markerPosition[0]);
-      console.log(markerPosition[1]);
+
     const {url} = {...petUrl}
-      console.log(url);
-      await axios.post("http://192.168.15.79:8080/pets", { characteristics: characteristics, description: description, city: city, state: state, lat: markerPosition[0], lng: markerPosition[1], url: url}).then((res)=>{
+      if(type.toLocaleLowerCase() !== "ocean" && markerPosition && url !== "" && description !== ""){
+      await axios.post("http://192.168.15.79:8080/pets", { description: description, city: city, state: state, lat: markerPosition[0], lng: markerPosition[1], url: url}).then((res)=>{
         console.log(res);
       })
       navigate("/home")
-      
+    }
 
     }
+
     return ( 
         <section className="addPet">
             <NavSlide></NavSlide>
@@ -92,24 +96,25 @@ const AddPet = () => {
                                  <h3>Tipo de cadastro</h3>   
                                 </div>
                                 <div className="checkboxes">
-                                <div className="campoCheckBox">
-                                <input type="checkbox" name="" id="" />
-                                <label>Perdido</label>    
-                                </div>
-                                <div className="campoCheckBox">
-                                <input type="checkbox" name="" id="" />
-                                <label>Abandonado</label>    
-                                </div>
+                                <Select options={["Abandonado", "Perdido"]} defaultValue="Faça sua escolha" onChange={(e)=>{ if(e.target.value == "Perdido"){
+                                setPerdido(true)}else{
+                                  setPerdido(false)
+                                }} }></Select>
 
                                 </div>
                                
                             </div>
-                            <Input name={"Espécie"}></Input> 
-                            <Input name={"Cor"}></Input> 
-                            <Input name={"Caracteristicas"} value={characteristics} setValue={setCharacteristics} textArea={true}></Input>
+                            <Input name={"Espécie"} value={especie} setValue={setEspecie}></Input> 
+                            <Input name={"Cor"} value={Cor} setValue={setCor}></Input>
                             <Input name={"Descrição"} value={description} setValue={setDescription} textArea={true}></Input>
-                            <Input name={"Email de Contato"}></Input> 
-                            <Input name={"Telefone"}></Input> 
+                            {perdido?
+                                <>
+                            <Input name={"Email de Contato"} setValue={setEmail} value={email}></Input>
+                            <Input name={"Telefone"} setValue={setTelefone} value={telefone}></Input>
+                                </>
+                              
+                            :null}
+                
 
                         </div>
                         <div className="imagesMaps">

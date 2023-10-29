@@ -19,7 +19,7 @@ const Suporte = () => {
 
     const sendEmail = (e) => {
       e.preventDefault();
-      if(name !== "" && email!== ""&& message != ""){
+      if(name !== "" && email!== ""&& message !== ""){
       emailjs.sendForm('service_1ivi5yg', 'template_r3qrv95', form.current, 'Ho6N_yBd1QwlMUZ7K')
         .then((result) => {
             console.log(result.text);

@@ -47,12 +47,13 @@ const NavSlide = (props:NavProps)=>{
             <nav>
                 <ul>
                     <li>
-                        <NavLink className={"navSlide"} to={"/Home"}>
+                        <NavLink className={"navSlide"} to={"/home"}>
                          <img src={home}/>
                         <p>Home</p>   
                         </NavLink>
                         
                     </li>
+
                     <li>
                     <NavLink className={"navSlide"} to={"/addPet"}>
 

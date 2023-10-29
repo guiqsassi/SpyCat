@@ -147,17 +147,16 @@ font-weight: 600;
 }
 .petsWrap{
     width: 100%;
+    /* height: 100vh; */
     display: flex;
-    gap: 20px;
+    row-gap: 1%;
+    gap: 40px;
     /* align-items: center; */
     flex-wrap:wrap;
     flex-direction: row;
 
 }
-.petsWrap > *{
-    /* flex-basis: 33%; default value */
-    /* flex-grow: 0; */
-}
+
 @media (max-width: 1400px) {
     .pets{
         align-items: end;

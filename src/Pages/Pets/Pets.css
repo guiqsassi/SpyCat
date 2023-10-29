@@ -236,7 +236,7 @@ line-height: normal;
     min-width: 500px;
     min-height: 400px;
     max-width: 500px;
-    m-height: 400px;
+    max-height: 400px;
 }
 .corouselImages{
     width: 70%;

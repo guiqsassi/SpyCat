@@ -14,14 +14,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<LandingPage></LandingPage>}/>
-        <Route path='/Cadastro' element={<Cadastro></Cadastro>}/>
-        <Route path='/Login' element={<Login></Login>}/>
-        <Route path='/Home' element={<Home></Home>}/>
-        <Route path='/Pets' element={<PetsPage></PetsPage>}/>
-        <Route path='/AddPet' element={<AddPet></AddPet>}/>
-        <Route path='/Suporte' element={<Suporte></Suporte>}/>
-        <Route path='/User' element={<User></User>}/>
+        <Route path='/' element={<LandingPage/>}/>
+        <Route path='/Cadastro' element={<Cadastro/>}/>
+        <Route path='/Login' element={<Login/>}/>
+        <Route path='/Home' element={<Home/>}/>
+        <Route path='/Pets' element={<PetsPage/>}/>
+        <Route path='/AddPet' element={<AddPet/>}/>
+        <Route path='/Suporte' element={<Suporte/>}/>
+        <Route path='/User' element={<User/>}/>
       </Routes>
     </BrowserRouter>
   );
