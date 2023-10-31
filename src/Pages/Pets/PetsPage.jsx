@@ -7,74 +7,83 @@ import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import "leaflet/dist/leaflet.css"
 import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L from "leaflet"
+import { useSelector } from "react-redux";
 import axios from "axios";
+import arrow from "../../images/Arrow.png"
+import petReducer from "../../Redux/Pet/PetReducer";
+import { useSearchParams } from "react-router-dom";
+import { BiSolidXCircle } from "react-icons/bi";
+import seta from "../../images/seta.png"
 
 const PetsPage = ()=>{
-    const arrayImageCat = ["https://cdn.jwplayer.com/v2/media/OJGSRhSM/poster.jpg?width=720", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://assets-au-01.kc-usercontent.com/ab37095e-a9cb-025f-8a0d-c6d89400e446/9749fcd8-168c-4b1b-979c-f162c491b7c2/article-the-daily-activities-of-your-cat.jpg"]
-    const [bigImage, setBigImage] = useState(arrayImageCat[0])
-    const [city, setCity] = useState("")
-    const [state, setState] = useState("")
-    const [position, setPosition] = useState([-27.548258, -48.498994])
-    const [markerPosition, setMarkerPosition] = useState(null)
+    const imageCollunm = useRef()
+    const [bigImage, setBigImage] = useState()
+    const [arrayImageCat, setArrayImageCat] = useState("")
+    const [searchParams] = useSearchParams()
+    const id = searchParams.get("id")
+    console.log("O seu id é:"+ id);
+    const [pet, setPet] = useState()
+    const [marker, setMarker] = useState()
+    const [modalImg, setModalImg] = useState(0)
+    console.log(pet);
     const markerIcon = new L.Icon({
         iconUrl: require("../../images/locator.png"),
         iconSize: [30, 30],
         iconAnchor: [17, 46], //[left/right, top/bottom]
         popupAnchor: [0, -46], //[left/right, top/bottom]
       });
-      function MyComponent() {
-            const map = useMapEvents({
-            click() {
-              map.locate()
-            },
-            locationfound(e) {
-              setPosition(e.latlng)
-              map.flyTo(e.latlng, map.getZoom())
-            },
-          }) 
-        return 
-      } 
-      const MapEvents = () => {
-        useMapEvents({
-          click (e) {
-            // setState your coords here
-            // coords exist in "e.latlng.lat" and "e.latlng.lng"
-            setMarkerPosition([e.latlng.lat, e.latlng.lng])
-            axios.post(`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&langCode=EN&location=${e.latlng.lng},${e.latlng.lat}`).then((res)=>{
-                setCity(res.data.address.City)
-                setState(res.data.address.Region)
+
+      useEffect(
+        ()=>{
+            axios.get(`http://192.168.15.79:8080/pets/${id}`).then((res)=>{
+                setPet(res.data)
+                setMarker([res.data.lat, res.data.lng])
+                setBigImage(res.data.url)
+                setArrayImageCat([res.data.url,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://assets-au-01.kc-usercontent.com/ab37095e-a9cb-025f-8a0d-c6d89400e446/9749fcd8-168c-4b1b-979c-f162c491b7c2/article-the-daily-activities-of-your-cat.jpg"])
             })
-            console.log(e.latlng.lat);
-            console.log(e.latlng.lng);
-            console.log(city);
-           
-          },
-        });
-        return markerPosition === null ? null : (
-            <Marker icon={markerIcon} position={markerPosition}>
-              <Popup className="popup">{city} <br></br> {state}</Popup>
-            </Marker>
-          )
-    }
-
-
+        }
+      ,[])
+        const handleClickUp = ()=>{
+            console.log(imageCollunm.current.offsetHeight);
+            imageCollunm.current.scrollTop -= imageCollunm.current.offsetHeight
+        }
+        const handleClickBottom = ()=>{
+            console.log(imageCollunm.current.offsetHeight);
+            imageCollunm.current.scrollTop += imageCollunm.current.offsetHeight
+        }
+        const modalImageLeft=()=>{
+            if(modalImg + 1 < arrayImageCat.length)
+            setModalImg(modalImg+1)
+            console.log(modalImg);
+        }
+        const modalImageRight=()=>{
+            if(modalImg-1 != -1){
+                setModalImg(modalImg - 1)
+            }
+        }
     return(
         <section className="petsSection">
         
             <NavSlide></NavSlide>
-            <div className="petInfo">
+            {pet?
+                    <div className="petInfo">
                 <div className="imageSection">
                     <div className="images">
                     <div className="bigImage">
                         <img src={bigImage} alt="" />
                     </div>
-                    <div className="imageCollunm">
+                    <div className="Collunm" >
+                        <img src={seta} style={{maxWidth: "24px", transform: "scaleY(-1)", cursor: "pointer", marginBottom: "5px"}} onClick={handleClickUp} alt="" />
+                    <div className="imagesCollums" ref={imageCollunm}>
                     {arrayImageCat? arrayImageCat.map((imag)=>{
                         return(
-                            <img src={imag} onClick={()=>{setBigImage(imag)}} alt="" />
+                            <img src={imag} className="imgCollunmSon" onClick={()=>{setBigImage(imag)}} alt="" />
                         )
-                    }): null}
+                    }): null
+                    }
+                    </div>
 
+                    <img src={seta} style={{maxWidth: "24px", cursor: "pointer",  marginTop: "5px"}} onClick={handleClickBottom}  alt="" />
                     </div>
                     
                     
@@ -90,13 +99,16 @@ const PetsPage = ()=>{
                         
                     </div>
                     <div className="map">
-                    <MapContainer id="map" style={{maxHeight: "300px", maxWidth: "400px", zIndex:0}} center={position}  zoom={13} scrollWheelZoom={true}>
+                    <MapContainer id="map" dragging={true} style={{maxHeight: "300px", maxWidth: "400px", zIndex:0}} center={marker}  zoom={13} scrollWheelZoom={false}>
                 <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <MyComponent/>
-                <MapEvents />
+                <Marker position={marker} icon={markerIcon}>
+                    <Popup>
+                        {pet.city}
+                    </Popup>
+                </Marker>
 
                 </MapContainer>
                     </div>
@@ -105,7 +117,7 @@ const PetsPage = ()=>{
                     <div className="infoBanner">
                         <div className="bannerCotent">
                         <label>Descrição</label>
-                        <div className="campoTextoDescricao"></div>
+                        <div className="campoTextoDescricao"> {pet.description} </div>
                         <label>Espécie</label>
                         <div className="campoTexto"></div>    
                         <label>Cor</label>
@@ -116,7 +128,10 @@ const PetsPage = ()=>{
 
                     </div>
                 </div>
-            </div>
+            </div>:
+            null
+        }
+    
             <div className="comentarios">
                 <div className="tittleComentarios">
                     <h3>Comentários</h3>
@@ -130,7 +145,17 @@ const PetsPage = ()=>{
 
                 </div>
             </div>
+        {/* <div className="imageModal">
+            <div className="imageModalContainer">
+            <BiSolidXCircle size={30} color="F98AAE" className="close"></BiSolidXCircle>
+            <img src={arrow} onClick={modalImageLeft}  className="arrow"/>
+            <div className="corouselImages">
+                <img src={arrayImageCat[modalImg]} className="imagesFromModal" alt="" />
+            </div>
+            <img src={arrow} onClick={modalImageRight}  className="arrow"/>
 
+            </div>
+        </div> */}
         </section>
     )
 }

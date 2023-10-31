@@ -24,6 +24,7 @@ const Login = () =>{
             payload: {logged: true}
         })
         console.log(logged)
+        navigate("/home")
     }
 
     console.log(logged)

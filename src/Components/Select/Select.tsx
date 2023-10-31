@@ -3,7 +3,8 @@ import "./Select.css"
 type SelectProps= {
     label: string,
     defaultValue: string,
-    options: string[]
+    options: string[],
+    onChange: ()=>{}
 
 }
 const Select = (props:SelectProps)=>{
@@ -11,8 +12,8 @@ const Select = (props:SelectProps)=>{
     return(
        <div className="campoSelect">
         <label>{props.label}</label>
-        <select>
-            <option value={props.defaultValue}>{props.defaultValue}</option>
+        <select onChange={props.onChange}>
+            <option disabled value={props.defaultValue} selected>{props.defaultValue}</option>
             {props.options.map((name)=>{
                 return(
                     <option value={name}>{name}</option>

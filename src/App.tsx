@@ -7,17 +7,21 @@ import Cadastro from './Pages/Cadastro/Cadastro';
 import Home from './Pages/Home/Home';
 import AddPet from './Pages/AddPet/AddPet';
 import PetsPage from './Pages/Pets/PetsPage';
+import Suporte from './Pages/Suporte/Suporte';
+import User from './Pages/User/User';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/Home' element={<LandingPage></LandingPage>}/>
-        <Route path='/Cadastro' element={<Cadastro></Cadastro>}/>
-        <Route path='/Login' element={<Login></Login>}/>
-        <Route path='/' element={<Home></Home>}/>
-        <Route path='/Pets' element={<PetsPage></PetsPage>}/>
-        <Route path='/AddPet' element={<AddPet></AddPet>}/>
+        <Route path='/' element={<LandingPage/>}/>
+        <Route path='/Cadastro' element={<Cadastro/>}/>
+        <Route path='/Login' element={<Login/>}/>
+        <Route path='/Home' element={<Home/>}/>
+        <Route path='/Pets' element={<PetsPage/>}/>
+        <Route path='/AddPet' element={<AddPet/>}/>
+        <Route path='/Suporte' element={<Suporte/>}/>
+        <Route path='/User' element={<User/>}/>
       </Routes>
     </BrowserRouter>
   );

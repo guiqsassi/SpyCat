@@ -10,7 +10,9 @@ type InputProps = {
     setValue: Dispatch<SetStateAction<string>>;
     icon?: string;
     textArea?: Boolean;
+    error?: Boolean;
     password?: string;
+    formName?: string
 }
 
 const Input = (props:InputProps )=>{
@@ -29,22 +31,20 @@ const Input = (props:InputProps )=>{
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         props.setValue(e.target.value)
-        console.log(props.value)
     }
     const handleChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
         props.setValue(e.target.value)
-        console.log(props.value)
     }
 
     return(
         <div className="campoInput">
-            <label>{props.name}</label>
+            <label style={props.error? { color: "red"}: {}}>{props.name}</label>
         {props.textArea? <div className="TextContaier">
-        <textarea value={props.value} onChange={handleChangeTextArea} placeholder={props.placeholder}/>   
+        <textarea style={props.error? { borderColor: "red"}: {}} name={props.formName} value={props.value} onChange={handleChangeTextArea} placeholder={props.placeholder}/>   
         </div>:
-          <div className="inputContainer">
+          <div className="inputContainer"  style={props.error? { borderColor: "red"}: {}}>
          {props.icon? <img className="iconInput" src={props.icon}/>:null}
-         <input type={view? "password" : "text"} value={props.value} onChange={handleChange} placeholder={props.placeholder}/>   
+         <input name={props.formName} type={view? "password" : "text"} value={props.value} onChange={handleChange} placeholder={props.placeholder}/>   
          {props.password? <img className="passwordInput" onClick={()=>{ view? setView(false): setView(true)}} src={view? passwordClosed: passwordOpen}/> : null}
 
         </div>

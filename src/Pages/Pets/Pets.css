@@ -28,27 +28,42 @@
     justify-content: end;
     min-width: 850px;
 }
-.imageSection .imageCollunm{
+.Collunm{
     width: 20%;
+    max-width: 100px;
     min-height: 300px;
-
+    margin-left: 10px;
     height: 75%;
+    flex-direction: column;
+    align-items: center;
     /* background-color: black; */
     display: flex;
-    align-items: center;
+    
     flex-direction: column;
-    justify-content: space-between;
+}
+.imagesCollums{
+    overflow-x: auto;
+    scroll-behavior: smooth;
+
+}
+.imagesCollums::-webkit-scrollbar{
+    display: none;
 }
 .imageSection .bigImage{
     width: 54%; 
      height: 100%; 
      display: flex; 
      align-items: end; 
+     justify-content: end;
      max-width: 500px; 
+     min-width: 500px; 
     min-height: 300px; 
 
 
 
+}
+.imgCollunmPlus{
+    background-color: black;
 }
 .popup{
     text-align: center;
@@ -56,11 +71,13 @@
 .imageSection .bigImage img{
     max-height: 300px;
     min-height: 300px;
-    max-width: 450px;
+    max-width: 500px;
 }
-.imageCollunm img{
+.imgCollunmSon{
+    margin-bottom: 10px;
     max-width: 80%;
-    max-width: 150px;
+    max-height: 100px;
+    max-width: 100px;
 }
 .petAbout{
     width: 50%;
@@ -126,7 +143,11 @@ line-height: normal;
     width: 60%;
     min-height: 80vh;
     margin-left: 10%;
+    margin-top: 5%;
 
+}
+.imgCollunmSon{
+    cursor: pointer;
 }
 .tittleComentarios{
     width: 100%;
@@ -186,4 +207,38 @@ line-height: normal;
     align-items: center;
     justify-content: center;
     
+}
+.imageModal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.507);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imageModalContainer{
+    width: 80%;
+    height: 80vh;
+    background-color: #FFF;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.close{
+    position: absolute;
+    top: 20px;
+}
+.imagesFromModal{
+    min-width: 500px;
+    min-height: 400px;
+    max-width: 500px;
+    max-height: 400px;
+}
+.corouselImages{
+    width: 70%;
+    height: 100%;
 }

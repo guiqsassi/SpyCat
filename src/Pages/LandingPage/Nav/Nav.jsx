@@ -1,7 +1,7 @@
 import "./Nav.css"
 import logo from "../../../images/logo.png"
 import Button from "../../../Components/Button/Button"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 const Nav = ()=>{
     return (
         <header className="navOutside">
@@ -17,7 +17,9 @@ const Nav = ()=>{
                         Sobre nós
                     </li>
                     <li>
+                        <NavLink className={"navLink"} to={"/login"}>
                         Entre
+                        </NavLink>
                     </li>
                     <li>
                         <Link to={"/Cadastro"}>
