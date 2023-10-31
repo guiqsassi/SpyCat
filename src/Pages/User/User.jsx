@@ -6,6 +6,7 @@ import Edit from "../../images/edit.png"
 import React, { useState, useRef, useEffect } from 'react';
 import arrow from "../../images/Arrow.png"
 import { transform } from "typescript";
+import { scale } from "@cloudinary/url-gen/actions/resize";
 import Input from "../../Components/Input/Input";
 import Select from "../../Components/Select/Select";
 import ButtonForms from "../../Components/ButtonForms/ButtonForms";

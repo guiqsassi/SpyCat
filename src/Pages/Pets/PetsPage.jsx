@@ -14,6 +14,7 @@ import petReducer from "../../Redux/Pet/PetReducer";
 import { useSearchParams } from "react-router-dom";
 import { BiSolidXCircle } from "react-icons/bi";
 import seta from "../../images/seta.png"
+import Api from "../../Api/Api";
 
 const PetsPage = ()=>{
     const imageCollunm = useRef()
@@ -35,7 +36,7 @@ const PetsPage = ()=>{
 
       useEffect(
         ()=>{
-            axios.get(`http://192.168.15.79:8080/pets/${id}`).then((res)=>{
+            axios.get(`${Api}/pets/${id}`).then((res)=>{
                 setPet(res.data)
                 setMarker([res.data.lat, res.data.lng])
                 setBigImage(res.data.url)

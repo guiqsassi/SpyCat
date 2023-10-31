@@ -9,6 +9,7 @@ import { UseSelector } from "react-redux/es/hooks/useSelector"
 import {useEffect, useState} from 'react';
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import Api from "../../Api/Api"
 const Home = ()=>{
 
     const [pets, setPets] = useState([{}])
@@ -16,7 +17,7 @@ const Home = ()=>{
     
     useEffect(
         ()=>{
-            axios.get("http://192.168.15.79:8080/pets").then(res=> setPets(res.data))
+            axios.get(Api+ "/pets").then(res=> setPets(res.data))
         }
     ,[])
     return(
