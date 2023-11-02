@@ -107,8 +107,9 @@ const Home = ()=>{
                 <div className="pets">
                 <div className="petsWrap">
                     {pets? pets.map((pet)=>{
+                        
                         return(
-                            <PetView image={pet.url} pet={pet}></PetView>
+                            <PetView image={pet.images} pet={pet}></PetView>
                         )
                     })
                     : null}

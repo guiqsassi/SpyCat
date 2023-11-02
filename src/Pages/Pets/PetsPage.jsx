@@ -38,8 +38,8 @@ const PetsPage = ()=>{
         ()=>{
             axios.get(`${Api}/pets/${id}`).then((res)=>{
                 setPet(res.data)
-                setMarker([res.data.lat, res.data.lng])
-                setBigImage(res.data.url)
+                // setMarker([res.data.lat, res.data.lng])
+                setBigImage(res.data.images[0])
                 setArrayImageCat([res.data.url,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://assets-au-01.kc-usercontent.com/ab37095e-a9cb-025f-8a0d-c6d89400e446/9749fcd8-168c-4b1b-979c-f162c491b7c2/article-the-daily-activities-of-your-cat.jpg"])
             })
         }
@@ -120,9 +120,9 @@ const PetsPage = ()=>{
                         <label>Descrição</label>
                         <div className="campoTextoDescricao"> {pet.description} </div>
                         <label>Espécie</label>
-                        <div className="campoTexto"></div>    
+                        <div className="campoTexto">{pet.specie}</div>    
                         <label>Cor</label>
-                        <div className="campoTexto"></div>    
+                        <div className="campoTexto">{pet.color}</div>    
                         <label>Data de encontro</label>
                         <div className="campoTexto"></div>    
                         </div>

@@ -3,7 +3,6 @@ import seta from "../../images/seta.png"
 import "./PetView.css"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { image } from "@cloudinary/url-gen/qualifiers/source"
 type propsPetView={
     image: string
     pet: {

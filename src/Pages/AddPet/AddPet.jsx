@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import { useSelector } from "react-redux";
 import Select from "../../Components/Select/Select";
+import Api from "../../Api/Api";
 const AddPet = () => {
   const navigate = useNavigate()
     const [position, setPosition] = useState([-27.548258, -48.498994])
@@ -20,12 +21,13 @@ const AddPet = () => {
     const [Cor, setCor] = useState("")
     const [email, setEmail] = useState("")
     const [telefone, setTelefone] = useState("")
-    const [perdido, setPerdido] = useState("")
-    const [abandonado, setAbandonado] = useState("")
+    const [status, setStatus] = useState("")
+    const [view, setView] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
     const [type, setType] = useState("")
     const petUrl = useSelector(state=> state.petReducer)
+
     const markerIcon = new L.Icon({
         iconUrl: require("../../images/locator.png"),
         iconSize: [30, 30],
@@ -56,9 +58,7 @@ const AddPet = () => {
                 setState(res.data.address.Region)
                 setType(res.data.address.Type);
             })
-            console.log(e.latlng.lat);
-            console.log(e.latlng.lng);
-            console.log(city);
+
            
           },
         });
@@ -68,16 +68,27 @@ const AddPet = () => {
             </Marker>
           )
     }
+    const date = new Date().toJSON()
+    console.log(date);
 
     const handleClick = async()=>{
 
-    const {url} = {...petUrl}
-      if(type.toLocaleLowerCase() !== "ocean" && markerPosition && url !== "" && description !== ""){
-      await axios.post("http://192.168.15.79:8080/pets", { description: description, city: city, state: state, lat: markerPosition[0], lng: markerPosition[1], url: url}).then((res)=>{
-        console.log(res);
-      })
-      navigate("/home")
+    // const {url} = {...petUrl}
+    const url = "https://vivoverde.com.br/wp-content/uploads/2010/02/sphynx_cats_1a_thumb.jpg"
+    const location = {
+        latitude: markerPosition[0],
+        longitude: markerPosition[1],
+        date: date
+
     }
+      if(type.toLocaleLowerCase() !== "ocean" && markerPosition && url !== "" && description !== "" && Cor !== "" && especie !== "" && status !== ""){
+      await axios.post(`${Api}/pets`, { description: description, color: Cor, specie: especie ,city: city, state: state, location: location, images: [url], status: status.toUpperCase()}).then((res)=>{
+        console.log(res);
+      }
+      )
+    }
+    console.log(status);
+    navigate("/home")
 
     }
 
@@ -97,9 +108,9 @@ const AddPet = () => {
                                 </div>
                                 <div className="checkboxes">
                                 <Select options={["Abandonado", "Perdido"]} defaultValue="Faça sua escolha" onChange={(e)=>{ if(e.target.value == "Perdido"){
-                                setPerdido(true)}else{
-                                  setPerdido(false)
-                                }} }></Select>
+                                setView(true)}else{
+                                  setView(false)
+                                } setStatus(e.target.value)} }></Select>
 
                                 </div>
                                
@@ -107,7 +118,7 @@ const AddPet = () => {
                             <Input name={"Espécie"} value={especie} setValue={setEspecie}></Input> 
                             <Input name={"Cor"} value={Cor} setValue={setCor}></Input>
                             <Input name={"Descrição"} value={description} setValue={setDescription} textArea={true}></Input>
-                            {perdido?
+                            {view?
                                 <>
                             <Input name={"Email de Contato"} setValue={setEmail} value={email}></Input>
                             <Input name={"Telefone"} setValue={setTelefone} value={telefone}></Input>
