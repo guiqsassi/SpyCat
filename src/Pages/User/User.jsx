@@ -146,7 +146,7 @@ const User = () => {
                 <div className="modalContainerUser">
                     <div className="modalTittle">
                         <h3>Editar Cadastro</h3>
-                        <BiSolidXCircle color="F98AAE" size={35} style={{marginRight: "20px", cursor: "pointer"}} onClick={()=>{ setDisplay("none")}}></BiSolidXCircle>
+                        <BiSolidXCircle  color="F98AAE" size={35} style={{marginRight: "20px", cursor: "pointer"}} onClick={()=>{ setDisplay("none")}}></BiSolidXCircle>
                     </div>
                     <div className="userEditContainer">
                     <UploadWidgetUser></UploadWidgetUser>
@@ -154,7 +154,7 @@ const User = () => {
                 <Input placeholder="Email" icon={"https://i.postimg.cc/VktJx338/email.png"} value={email} setValue={setEmail} name={"Email"}></Input>
                 <Input password="password" placeholder="Senha" icon={"https://i.postimg.cc/MKNcrW35/cadeado.png"} value={password} setValue={setPassword} name={"Senha"}></Input>
                         <Select label={"Estado"} defaultValue={"Insira o seu estado"} onChange={handleStateSelected} options={ siglasEstadosBrasil}/>
-                        <Select label={"Cidade"} defaultValue={"Insira o seu estado"} options={ cidades}/>
+                        <Select dataList={true} list="cidades" label={"Cidade"} defaultValue={"Insira o seu estado"} options={ cidades}/>
                     <ButtonForms name="atualizar"></ButtonForms>
                     </div> 
                 </div>

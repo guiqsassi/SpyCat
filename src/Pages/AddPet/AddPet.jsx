@@ -2,12 +2,12 @@ import "./AddPet.css"
 import NavSlide from "../../Components/NavSlide/NavSlide";
 import Input from "../../Components/Input/Input";
 import "leaflet/dist/leaflet.css"
-import {useState, useEffect} from "react"
+import {useState, useEffect, useRef} from "react"
 import UploadWidget from "../../Components/UploadWidged/UploadWidget";
 import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L from "leaflet"
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useHref, useNavigate } from "react-router-dom";
 import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import { useSelector } from "react-redux";
 import Select from "../../Components/Select/Select";
@@ -28,12 +28,14 @@ const AddPet = () => {
     const [type, setType] = useState("")
     const petUrl = useSelector(state=> state.petReducer)
 
+
     const markerIcon = new L.Icon({
         iconUrl: require("../../images/locator.png"),
         iconSize: [30, 30],
         iconAnchor: [17, 46], //[left/right, top/bottom]
         popupAnchor: [0, -46], //[left/right, top/bottom]
       });
+      
       function MyComponent() {
             const map = useMapEvents({
             click() {
@@ -130,7 +132,7 @@ const AddPet = () => {
                         </div>
                         <div className="imagesMaps">
                             <UploadWidget className={"uploadWidget"}></UploadWidget>
-                            <MapContainer id="map"className="mapAdd" center={position}  zoom={13} scrollWheelZoom={true}>
+                  <MapContainer id="map"className="mapAdd" center={position}  zoom={13} scrollWheelZoom={true}>
                 <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

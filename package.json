@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-redux": "^7.1.26",
     "axios": "^1.5.0",
+    "dotenv": "^16.3.1",
     "leaflet": "^1.9.4",
     "leaflet.locatecontrol": "^0.79.0",
     "localforage": "^1.10.0",

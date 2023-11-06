@@ -1,3 +1,3 @@
-const Api = "http://192.168.56.1:8080"
+const Api = process.env.REACT_APP_BACKEND_URL
 
 export default Api;
