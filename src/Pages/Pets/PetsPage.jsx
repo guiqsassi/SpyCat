@@ -1,17 +1,16 @@
 import "./Pets.css"
 import NavSlide from "../../Components/NavSlide/NavSlide"
-import {useEffect, useState, useCallback, useMemo, useRef} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import fav from "../../images/fav.png"
 import Input from "../../Components/Input/Input";
 import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import UploadWidget from "../../Components/UploadWidged/UploadWidget";
 import "leaflet/dist/leaflet.css"
-import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents } from 'react-leaflet';
-import L from "leaflet"
+import { Marker} from 'react-leaflet';
+import markerIcon from "../../Components/Map/MarkerIcon";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import arrow from "../../images/Arrow.png"
-import petReducer from "../../Redux/Pet/PetReducer";
+import Map from "../../Components/Map/Map";
 import { useSearchParams } from "react-router-dom";
 import { BiSolidXCircle } from "react-icons/bi";
 import seta from "../../images/seta.png"
@@ -28,14 +27,8 @@ const PetsPage = ()=>{
     const [marker, setMarker] = useState()
     const [position, setPosition] = useState([-27.548258, -48.498994])
     const [markerPosition, setMarkerPosition] = useState(null)
-
-
     const [viewRescueModal, setViewRescueModal] = useState("none")
-    const [city, setCity] = useState("")
-    const [state, setState] = useState("")
-    const [type, setType] = useState("")
 
-    const petUrl = useSelector(state=> state.petReducer)
 
     console.log(pet);
 
@@ -65,49 +58,6 @@ const PetsPage = ()=>{
             console.log(imageCollunm.current.offsetHeight);
             imageCollunm.current.scrollTop += imageCollunm.current.offsetHeight
         }
-
-
-    const markerIcon = new L.Icon({
-        iconUrl: require("../../images/locator.png"),
-        iconSize: [30, 30],
-        iconAnchor: [17, 46], //[left/right, top/bottom]
-        popupAnchor: [0, -46], //[left/right, top/bottom]
-      });
-      
-      function MyComponent() {
-            const map = useMapEvents({
-            click() {
-              map.locate()
-            },
-            locationfound(e) {
-              setPosition(e.latlng)
-              map.flyTo(e.latlng, map.getZoom())
-            },
-          }) 
-        return 
-      } 
-      
-      const MapEvents = () => {
-        useMapEvents({
-          click (e) {
-            // setState your coords here
-            // coords exist in "e.latlng.lat" and "e.latlng.lng"
-            setMarkerPosition([e.latlng.lat, e.latlng.lng])
-            axios.post(`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&langCode=EN&location=${e.latlng.lng},${e.latlng.lat}`).then((res)=>{
-                setCity(res.data.address.City)
-                setState(res.data.address.Region)
-                setType(res.data.address.Type);
-            })
-
-           
-          },
-        });
-        return markerPosition === null ? null : (
-            <Marker icon={markerIcon} position={markerPosition}>
-              <Popup className="popup">{city} <br></br> {state}</Popup>
-            </Marker>
-          )
-    }
 
         
     return(
@@ -148,18 +98,9 @@ const PetsPage = ()=>{
                         
                     </div>
                     <div className="map">
-                    <MapContainer id="map" dragging={true} style={{maxHeight: "300px", maxWidth: "400px", zIndex:0}} center={marker}  zoom={13} scrollWheelZoom={false}>
-                <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={marker} icon={markerIcon}>
-                    <Popup>
-                        {pet.city}
-                    </Popup>
-                </Marker>
+                 <Map position={position}>
 
-                </MapContainer>
+                 </Map>
                     </div>
                 </div>
                 <div className="petAbout">
@@ -202,15 +143,7 @@ const PetsPage = ()=>{
             <BiSolidXCircle size={30} onClick={handleModalRescueClick} color="F98AAE" className="close"></BiSolidXCircle>
             <h2>Avistamento de Pet</h2>
             <UploadWidget></UploadWidget>
-            <MapContainer id="map"className="mapAdd" center={position}  zoom={13} scrollWheelZoom={true}>
-                <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <MyComponent/>
-                <MapEvents />
-
-                </MapContainer>
+            <Map></Map>
                 <ButtonForms name="Enviar"></ButtonForms>
             </div>
         </div>
