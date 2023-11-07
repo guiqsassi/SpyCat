@@ -5,10 +5,13 @@ import "leaflet/dist/leaflet.css"
 import { useDispatch } from "react-redux"
 import PlaceMarkerOnClick from './PlaceMarkerOnClick';
 import axios from 'axios';
+import { Children } from 'react';
+import markerIcon from './MarkerIcon';
+import { useSelector } from 'react-redux';
 const Map = (props) => {
     const dispatch = useDispatch()
-    const [position, setPosition] = useState([-27.548258, -48.498994])
-    
+    const [positionMap, setPosition] = useState([-27.548258, -48.498994])
+    const {position} = useSelector(state=> state.mapReducer)
 
 
    function FindUser() {
@@ -25,6 +28,7 @@ const Map = (props) => {
             position: e.latlng
         }
     })
+    console.log(position)
     },
   }) 
 return 
@@ -34,8 +38,8 @@ return
         <MapContainer
         id="map"
         className="mapAdd"
-        center={props.position? props.position: position}
-        zoom={13}
+        center={ position}
+        zoom={20}
         scrollWheelZoom={true}
       >
         <TileLayer
@@ -48,6 +52,13 @@ return
        {props.placeMarker? 
         <PlaceMarkerOnClick></PlaceMarkerOnClick>:null   
     }
+      {Children.map(props.children,child =>
+        <>
+                {child}
+        
+        </>
+      
+      )}
       </MapContainer>
      );
 }

@@ -23,11 +23,9 @@ const Login = () =>{
             type: "user/login",
             payload: {logged: true}
         })
-        console.log(logged)
         navigate("/home")
     }
 
-    console.log(logged)
     return(
         <section className="Login">
         <div className="imageBg">

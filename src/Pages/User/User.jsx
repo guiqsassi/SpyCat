@@ -38,36 +38,30 @@ const User = () => {
     }
     const onClickRightFav = (e)=>{
         e.preventDefault()
-        console.log(couroselfav.current.offsetWidth);
         couroselfav.current.scrollLeft += couroselfav.current.offsetWidth
         
     }
     const onClickLeftFav = (e)=>{
         e.preventDefault()
-        console.log(couroselfav.current.offsetWidth);
         couroselfav.current.scrollLeft -= couroselfav.current.offsetWidth
         
     }
     const onClickRight = (e)=>{
         e.preventDefault()
-        console.log(courosel.current.offsetWidth);
         courosel.current.scrollLeft += courosel.current.offsetWidth
         
     }
     const onClickLeft = (e)=>{
         e.preventDefault()
-        console.log(courosel.current.offsetWidth);
         courosel.current.scrollLeft -= courosel .current.offsetWidth
         
     }
     const handleStateSelected =async (e)=>{
         const estado = (e.target.value)
-        console.log(estado);
         setCidades([])
         await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/municipios`).then((res)=>{
             const resposta = res.data
 
-            console.log(resposta);
             resposta.map((municipio)=>{
                 if(!cidades.includes(municipio.microrregiao.nome))(
                         setCidades((prev) =>  [...prev, municipio.nome ])

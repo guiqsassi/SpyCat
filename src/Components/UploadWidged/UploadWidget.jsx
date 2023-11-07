@@ -21,7 +21,6 @@ const UploadWidget = () => {
                 }
 
             })
-            console.log(url);
             setResImg(res.data.url)
         })
     };

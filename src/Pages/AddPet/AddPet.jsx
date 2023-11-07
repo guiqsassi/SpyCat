@@ -1,8 +1,8 @@
-import "./AddPet.css"
+import "./AddPet.css";
 import NavSlide from "../../Components/NavSlide/NavSlide";
 import Input from "../../Components/Input/Input";
-import "leaflet/dist/leaflet.css"
-import {useState} from "react"
+import "leaflet/dist/leaflet.css";
+import { useState } from "react";
 import UploadWidget from "../../Components/UploadWidged/UploadWidget";
 
 import axios from "axios";
@@ -14,47 +14,63 @@ import Api from "../../Api/Api";
 import Map from "../../Components/Map/Map";
 
 const AddPet = () => {
-  const navigate = useNavigate()
-    
-    const [markerPosition, setMarkerPosition] = useState(null)
-    const [description, setDescription] = useState("")
-    const [especie, setEspecie] = useState("")
-    const [Cor, setCor] = useState("")
-    const [email, setEmail] = useState("")
-    const [telefone, setTelefone] = useState("")
-    const [status, setStatus] = useState("")
-    const [view, setView] = useState("")
+  const navigate = useNavigate();
 
-    const {city, state, type, latitude, longitude} = useSelector(state=> state.mapReducer)
+  const [markerPosition, setMarkerPosition] = useState(null);
+  const [description, setDescription] = useState("");
+  const [especie, setEspecie] = useState("");
+  const [Cor, setCor] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [status, setStatus] = useState("");
+  const [view, setView] = useState("");
+
+  const { city, state, type, latitude, longitude } = useSelector(
+    (state) => state.mapReducer
+  );
 
 
+  const date = new Date().toJSON();
 
-
-    const date = new Date().toJSON()
-
-    const handleClick = async()=>{
-
+  const handleClick = async () => {
     // const {url} = {...petUrl}
-    const url = "https://vivoverde.com.br/wp-content/uploads/2010/02/sphynx_cats_1a_thumb.jpg"
+    const url =
+      "https://vivoverde.com.br/wp-content/uploads/2010/02/sphynx_cats_1a_thumb.jpg";
     const location = {
-        latitude: markerPosition[0],
-        longitude: markerPosition[1],
-        date: date
-
+      latitude: latitude,
+      longitude: longitude,
+      date: date,
+    };
+    console.log(Cor, especie, city, state, location, status, url);
+    if (
+      type.toLocaleLowerCase() !== "ocean" &&
+      latitude &&
+      url !== "" &&
+      description !== "" &&
+      Cor !== "" &&
+      especie !== "" &&
+      status !== ""
+    ) {
+      await axios
+        .post(`${Api}/pets`, {
+          description: description,
+          color: Cor,
+          specie: especie,
+          city: city,
+          state: state,
+          location: location,
+          images: [url],
+          status: status.toUpperCase(),
+        })
+        .then((res) => {
+          console.log(res);
+        });
     }
-      if(type.toLocaleLowerCase() !== "ocean" && markerPosition && url !== "" && description !== "" && Cor !== "" && especie !== "" && status !== ""){
-      await axios.post(`${Api}/pets`, { description: description, color: Cor, specie: especie ,city: city, state: state, location: location, images: [url], status: status.toUpperCase()}).then((res)=>{
-        console.log(res);
-      }
-      )
-    }
-    console.log(status);
-    navigate("/home")
+    navigate("/home");
+  };
 
-    }
-
-    return ( 
-      <section className="addPet">
+  return (
+    <section className="addPet">
       <NavSlide></NavSlide>
       <div className="petCreateContainer">
         <div className="banner">
@@ -110,8 +126,8 @@ const AddPet = () => {
               ) : null}
             </div>
             <div className="imagesMaps">
-                <UploadWidget></UploadWidget>
-                <Map findUser={true} placeMarker={true}></Map>
+              <UploadWidget></UploadWidget>
+              <Map findUser={true} placeMarker={true}></Map>
             </div>
           </div>
           <div className="confirmButton">
@@ -120,7 +136,7 @@ const AddPet = () => {
         </div>
       </div>
     </section>
-     );
-}
- 
+  );
+};
+
 export default AddPet;
