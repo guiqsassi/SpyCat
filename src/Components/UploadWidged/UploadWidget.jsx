@@ -7,12 +7,12 @@ const UploadWidget = () => {
     const [file, setFiles] = useState()
     const [resImg, setResImg] = useState()
     const dispatch = useDispatch()
-    const uploadImage = (files)=>{
+    const uploadImage = async (files)=>{
         const formData = new FormData()
         formData.append("file", files[0])
-        formData.append("upload_preset", "ml_default")
+        formData.append("upload_preset", "wtegldxha")
 
-        Axios.post("https://api.Cloudinary.com/v1_1/guiqsassi/image/upload",formData).then((res)=>{
+        await Axios.post("https://api.Cloudinary.com/v1_1/guiqsassi/image/upload",formData).then((res)=>{
             const url =  res.data.url   
         dispatch({
                 type: "url",
@@ -22,7 +22,9 @@ const UploadWidget = () => {
 
             })
             setResImg(res.data.url)
+            console.log(res.data);
         })
+
     };
 
 

@@ -140,6 +140,7 @@ line-height: normal;
 }
 .favoritar img{
     width: 32px;
+    cursor: pointer;
 }
 .comentarios{
     width: 60%;
@@ -210,7 +211,7 @@ line-height: normal;
     justify-content: center;
     
 }
-.rescueModal{
+.NewEnconterModal{
     width: 100%;
     height: 100%;
     position: fixed;
@@ -221,7 +222,7 @@ line-height: normal;
     align-items: center;
     justify-content: center;
 }
-.rescueModalContainer{
+.NewEnconterModalContainer{
     width: 80%;
     height: 80vh;
     background-color: #FFF;
@@ -231,10 +232,11 @@ line-height: normal;
     align-items: center;
     justify-content: space-around;
     gap: 20px;
+    border-radius: 20px;
     position: relative;
 
 }
-.rescueModalContainer h2{
+.NewEnconterModalContainer, .rescueModalContainer h2{
     color: #F98AAE;
     text-align: center;
     font-family: Rowdies;
@@ -249,4 +251,40 @@ line-height: normal;
     top: 20px;
     left: 20px;
     cursor: pointer;
+}
+.rescueModal{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.507);
+    display: flex;
+    align-items:center ;
+    justify-content: center;
+}
+.rescueModalContainer{
+    position: relative;
+    width: 30%;
+    height: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items:center; 
+        border-radius: 20px;
+
+}
+.RescueModalTittle{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.rescueModalActions{
+    width: 100%;
+    height: 80%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }

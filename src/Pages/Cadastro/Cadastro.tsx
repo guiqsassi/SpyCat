@@ -15,9 +15,13 @@ const Cadastro = ()=>{
     const navigate = useNavigate()
 
     const handleClickRegister = async()=>{
+      await axios.post("http://localhost:8080/users",{
+      username: name,
+      email: email,
+      password: password
+    })
       await axios({
-        method: "post",
-        url: "http://192.168.15.79:8080/users",
+
         data: {
             username: name,
             email: email,
