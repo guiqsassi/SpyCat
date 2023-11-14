@@ -15,7 +15,9 @@ import { useSearchParams } from "react-router-dom";
 import { BiSolidXCircle } from "react-icons/bi";
 import seta from "../../images/seta.png"
 import { useDispatch } from "react-redux";
+import Select from "../../Components/Select/Select";
 import Api from "../../Api/Api";
+import favMarkedIMG from "../../images/favMarked.png"
 
 const PetsPage = ()=>{
     const dispatch = useDispatch()
@@ -29,15 +31,28 @@ const PetsPage = ()=>{
     const [position, setPosition] = useState([])
     const [markerPosition, setMarkerPosition] = useState([12,12])
     const [viewRescueModal, setViewRescueModal] = useState("none")
-
+    const [viewEncounterModal, setViewEncounterModal] = useState("none")
+    const [favMarked, setFavMarked] = useState(false)
+    
 
     console.log(position);
-
+    const handleFavMarked = ()=>{
+        favMarked? 
+        setFavMarked(false):
+        setFavMarked(true)
+    }
     const handleModalRescueClick =()=>{
         if(viewRescueModal === "none"){
             setViewRescueModal("flex")
         }else{
             setViewRescueModal("none")
+        }
+    }
+    const handleViewEncounterModal =()=>{
+        if(viewEncounterModal === "none"){
+            setViewEncounterModal("flex")
+        }else{
+            setViewEncounterModal("none")
         }
     }
 
@@ -98,8 +113,12 @@ const PetsPage = ()=>{
                         <div className="cadBy">
                             <p>Cadastrado por: User</p>
                         </div>
-                        <div className="favoritar">
-                            <img src={fav}  />
+                        <div className="favoritar" onClick={handleFavMarked}>
+                            {favMarked?
+                            <img src={favMarkedIMG} />
+                            :
+                            <img src={fav}/>
+                        }
                         </div>
                         
                     </div>
@@ -129,8 +148,8 @@ const PetsPage = ()=>{
                         <div className="campoTexto"></div>    
                         </div>
                     </div>
-                        <ButtonForms name="Resgatar Pet"></ButtonForms>
-                        <ButtonForms onClick={handleModalRescueClick}  name="Atualizar Encontro"></ButtonForms>
+                        <ButtonForms onClick={handleModalRescueClick} name="Resgatar Pet"></ButtonForms>
+                        <ButtonForms onClick={handleViewEncounterModal}  name="Atualizar Encontro"></ButtonForms>
                 </div>
             </div>:
             null
@@ -151,15 +170,30 @@ const PetsPage = ()=>{
             </div>
 
 
-        <div className="rescueModal" style={{display: viewRescueModal}}>
-            <div className="rescueModalContainer">
-            <BiSolidXCircle size={30} onClick={handleModalRescueClick} color="F98AAE" className="close"></BiSolidXCircle>
+        <div className="NewEnconterModal" style={{display: viewEncounterModal}}>
+            <div className="NewEnconterModalContainer">
+            <BiSolidXCircle size={30} onClick={handleViewEncounterModal} color="F98AAE" className="close"></BiSolidXCircle>
             <h2>Avistamento de Pet</h2>
             <UploadWidget></UploadWidget>
             <Map placeMarker={true} findUser={true}></Map>
                 <ButtonForms name="Enviar"></ButtonForms>
             </div>
         </div>
+
+        <div className="rescueModal" style={{display: viewRescueModal}}>
+            <div className="rescueModalContainer">
+            <BiSolidXCircle size={30}  onClick={handleModalRescueClick} color="F98AAE" className="close"></BiSolidXCircle>
+            <div className="RescueModalTittle">
+            <h2>Resgate de Pet</h2>
+            </div>
+            <div className="rescueModalActions">
+            <Select options={["Encontrado", "Levado até Ong"]}></Select>
+                <ButtonForms name="Enviar"></ButtonForms>
+
+            </div>
+            </div>
+        </div>
+
         </section>
     )
 }
