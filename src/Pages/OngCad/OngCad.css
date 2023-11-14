@@ -1,0 +1,85 @@
+.OngCad{
+    width: 100%;
+    min-height: 100vh;
+    background-color: #F6F6F6;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.OngCreateContainer{
+    width: 70%;
+    height: 100vh;
+    /* min-height: 130vh; */
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    
+}
+.banner{
+    width: 100%;
+    border-radius: 10px;
+    /* height: 80%; */
+    background-color: white;
+}
+.bannerTittle{
+    width: 100%;
+}
+.bannerTittle h1{
+    text-align: center;
+    color: #4A2C36;
+text-align: center;
+font-family: Rowdies;
+font-size: 30px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+.bannerContent{
+    width: 100%;
+    height: 80%;
+    padding-left: 10%;
+    display: flex;
+    flex-direction: row;
+}
+.BannerInputs{
+    width: 50%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.mapAdd{
+    max-height: 250px;
+    max-width: 350px;
+    z-index:0;
+ }   
+.imagesMaps{
+    width: 40%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+.uploadWidget{
+    margin-bottom: 100px;
+}
+.confirmButton{
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-Width: 1300px) {
+ .mapAdd{
+    max-height: 200px;
+    max-width: 300px;
+    z-index:0
+ }   
+ .petCreateContainer{
+    width: 90%;
+ }
+}

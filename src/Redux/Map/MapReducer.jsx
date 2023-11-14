@@ -1,7 +1,7 @@
 
 const initialState = {
-    longitude: 111,
-    latitude: 111,
+    longitude: 0,
+    latitude: 0,
     city: "",
     state: "",
     type: "",

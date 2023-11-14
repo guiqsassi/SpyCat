@@ -9,6 +9,7 @@ import AddPet from './Pages/AddPet/AddPet';
 import PetsPage from './Pages/Pets/PetsPage';
 import Suporte from './Pages/Suporte/Suporte';
 import User from './Pages/User/User';
+import OngCad from './Pages/OngCad/OngCad';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/AddPet' element={<AddPet/>}/>
         <Route path='/Suporte' element={<Suporte/>}/>
         <Route path='/User' element={<User/>}/>
+        <Route path='/OngCad' element={<OngCad/>}></Route>
       </Routes>
     </BrowserRouter>
   );
