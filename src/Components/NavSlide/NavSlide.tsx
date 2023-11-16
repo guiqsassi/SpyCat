@@ -10,6 +10,9 @@ import logOut from "../../images/logOut.png"
 import config from "../../images/config.png"
 import add from "../../images/add.png"
 import { useNavigate } from "react-router-dom";
+import { UseSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux";
+import { RootState } from "../../Redux/rootReducer";
 
 type NavProps = {
     image?: string,
@@ -27,7 +30,10 @@ const NavSlide = (props:NavProps)=>{
     }
     const handleClickLogo = ()=>{
         navigate("/home")
-    }
+}
+
+    const userID = useSelector((state: RootState) => state.userReducer.userID);
+
     return (
         <div className="navContainer">
         <header className="navInside">
@@ -74,7 +80,7 @@ const NavSlide = (props:NavProps)=>{
                 <hr />
                 <ul>
                     <li>
-                    <NavLink className={"navSlide"} to={"/User"}>
+                    <NavLink className={"navSlide"} to={`/User?id=${userID}`}>
 
                     <img src={config}/>
                     <p>Perfil</p>

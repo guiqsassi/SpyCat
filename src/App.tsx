@@ -14,6 +14,7 @@ import OngCad from './Pages/OngCad/OngCad';
 function App() {
   return (
     <BrowserRouter>
+      
       <Routes>
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/Cadastro' element={<Cadastro/>}/>
@@ -25,6 +26,7 @@ function App() {
         <Route path='/User' element={<User/>}/>
         <Route path='/OngCad' element={<OngCad/>}></Route>
       </Routes>
+
     </BrowserRouter>
   );
 }

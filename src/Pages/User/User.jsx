@@ -1,6 +1,6 @@
 import NavSlide from "../../Components/NavSlide/NavSlide";
 import "./User.css"
-import { BiSolidXCircle } from "react-icons/bi";
+import { BiSolidXCircle, BiUserCircle } from "react-icons/bi";
 import PetView from "../../Components/PetView/PetView";
 import Edit from "../../images/edit.png"
 import React, { useState, useRef, useEffect } from 'react';
@@ -9,18 +9,45 @@ import Input from "../../Components/Input/Input";
 import Select from "../../Components/Select/Select";
 import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import UploadWidgetUser from "../../Components/UploadWidgedUser/UploadWidgetUser";
+import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+
 import axios from "axios";
+import Api from "../../Api/Api";
 const User = () => {
+    const {userIconUrl} = useSelector((state)=>state.userReducer)
+    const {userID} = useSelector((state)=> state.userReducer)
+    console.log(userID);
+
+    const [searchParams] = useSearchParams()
     const [estado, setEstado] = useState()
     const [cidades, setCidades] = useState([])
+    const [cidade, setCidade] = useState()
     const [display, setDisplay] = useState("none")
     const siglasEstadosBrasil = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
-      
-    const [name, setName] = useState("")
+    const id = searchParams.get("id")
+    const [name, setName] = useState("")    
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const couroselfav = useRef(null)
     const courosel = useRef(null)
+    const [user, setUser] = useState()
+
+        const getUser = async()=>{
+        await axios.get(`${Api}/users/${id}`).then((res)=>{
+            console.log(res.data);
+            setEmail(res.data.email);
+            setName(res.data.username)
+            setUser(res.data)
+        })
+    }
+    useEffect(
+        ()=>{
+            getUser()
+        }
+        
+    ,[userID])
     const pet = {
         "id": 1,
     "characteristics": "asdas",
@@ -36,6 +63,7 @@ const User = () => {
     "lat": -27.543719484487116,
     "lng": -48.500416874885566
     }
+
     const onClickRightFav = (e)=>{
         e.preventDefault()
         couroselfav.current.scrollLeft += couroselfav.current.offsetWidth
@@ -56,10 +84,12 @@ const User = () => {
         courosel.current.scrollLeft -= courosel .current.offsetWidth
         
     }
+
     const handleStateSelected =async (e)=>{
-        const estado = (e.target.value)
+        const estadoEscolhido =(e.target.value)
+        setEstado(estadoEscolhido)
         setCidades([])
-        await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/municipios`).then((res)=>{
+        await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoEscolhido}/municipios`).then((res)=>{
             const resposta = res.data
 
             resposta.map((municipio)=>{
@@ -71,18 +101,67 @@ const User = () => {
             })
         })
     }
+    
+
+    
+    const handleUpdateClick = async()=>{
+        console.log(cidade)
+        console.log(estado) 
+        await axios.put(`${Api}/users`,{
+            id: userID,
+            username: name,
+            email: email,
+            city: cidade,
+            state: estado,
+            icon: userIconUrl,
+            password: password
+
+        })
+    }
     return (
         <>
         <NavSlide/>
         <section className="UserSection">
             <div className="userInformation">
+                
+                {user?
                 <img src="https://pbs.twimg.com/profile_images/1564084321098629122/JljknKFp_400x400.jpg" className="userIcon"/>
+            : <BiUserCircle size={120} color="#F98AAE"></BiUserCircle>    
+            }
+                
                 <div className="userEdit">
-                 <h3>Olá Celso Portiolli</h3> <img src={Edit} className="editIcon" style={{cursor: "pointer"}} onClick={()=>{setDisplay("flex")}}/>
+                 <h3>Olá {name}</h3> 
+                 {user?
+                    userID== user.id? 
+                    <img src={Edit} className="editIcon" style={{cursor: "pointer"}} onClick={()=>{setDisplay("flex")}}/>
+                    :null
+                    :null
+                }
                 </div>
             </div>
             <div className="userPets">
                 <div className="carrosels">
+                    <div className="PetsCarrosel">
+                    <div className="tittlePets">
+                    <h3>Meus pets</h3>
+                    <h4> Veja Mais</h4>
+                    </div>
+                    <div className="carouselArrows">
+                    <img src={arrow} onClick={onClickLeft} className="arrow"/>
+
+                    <div className="petCards" ref={courosel}>
+                        {user?
+                            user.pet.map((pet)=>{
+                                return <PetView pet={pet} image={pet.images[0]}></PetView>
+                            }) 
+                            :
+                            null
+                    }
+                    </div>
+                    <img src={arrow} onClick={onClickRight} style={{transform: "scaleX(-1)"}} className="arrow"/>
+
+                    </div>
+                    </div>
                     <div className="PetsCarrosel">
                     <div className="tittlePets">
                     <h3>Pets Favoritos</h3>
@@ -107,29 +186,6 @@ const User = () => {
 
                     </div>
                     </div>
-                    <div className="PetsCarrosel">
-                    <div className="tittlePets">
-                    <h3>Meus pets</h3>
-                    <h4> Veja Mais</h4>
-                    </div>
-                    <div className="carouselArrows">
-                    <img src={arrow} onClick={onClickLeft} className="arrow"/>
-
-                    <div className="petCards" ref={courosel}>
-                    <PetView image={"https://cdn.britannica.com/39/7139-050-A88818BB/Himalayan-chocolate-point.jpg"} pet={pet}></PetView>
-                    <PetView image={pet.url} pet={pet}></PetView>
-                    <PetView image={pet.url} pet={pet}></PetView>
-                    <PetView image={pet.url} pet={pet}></PetView>
-                    <PetView image={pet.url} pet={pet}></PetView>
-                    <PetView image={pet.url} pet={pet}></PetView>
-                    <PetView image={pet.url} pet={pet}></PetView>
-                    <PetView image={pet.url} pet={pet}></PetView>
-                    <PetView image={pet.url} pet={pet}></PetView>
-                    </div>
-                    <img src={arrow} onClick={onClickRight} style={{transform: "scaleX(-1)"}} className="arrow"/>
-
-                    </div>
-                    </div>
 
                     
                 </div>
@@ -148,8 +204,8 @@ const User = () => {
                 <Input placeholder="Email" icon={"https://i.postimg.cc/VktJx338/email.png"} value={email} setValue={setEmail} name={"Email"}></Input>
                 <Input password="password" placeholder="Senha" icon={"https://i.postimg.cc/MKNcrW35/cadeado.png"} value={password} setValue={setPassword} name={"Senha"}></Input>
                         <Select label={"Estado"} defaultValue={"Insira o seu estado"} onChange={handleStateSelected} options={ siglasEstadosBrasil}/>
-                        <Select dataList={true} list="cidades" label={"Cidade"} defaultValue={"Insira o seu estado"} options={ cidades}/>
-                    <ButtonForms name="atualizar"></ButtonForms>
+                        <Select dataList={true} list="cidades" label={"Cidade"} defaultValue={"Insira o seu estado"} onChange={(e)=>{setCidade(e.target.value)}} options={ cidades}/>
+                    <ButtonForms name="atualizar" onClick={handleUpdateClick}></ButtonForms>
                     </div> 
                 </div>
             </div>

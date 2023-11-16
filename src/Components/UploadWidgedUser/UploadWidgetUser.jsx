@@ -16,7 +16,7 @@ const UploadWidgetUser = () => {
         Axios.post("https://api.Cloudinary.com/v1_1/guiqsassi/image/upload",formData).then((res)=>{
             const url =  res.data.url   
         dispatch({
-                type: "url",
+                type: "user/newUrl",
                 payload: {
                     url: url
                 }

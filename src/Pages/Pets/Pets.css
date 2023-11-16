@@ -288,3 +288,9 @@ line-height: normal;
     flex-direction: column;
     justify-content: space-evenly;
 }
+.Comments{
+    margin-top: 10%;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}

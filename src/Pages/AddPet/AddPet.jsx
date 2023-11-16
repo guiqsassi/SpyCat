@@ -28,14 +28,17 @@ const AddPet = () => {
   const { city, state, type, latitude, longitude } = useSelector(
     (state) => state.mapReducer
   );
+  const { userID } = useSelector(
+    (state) => state.userReducer
+  );
+
 
 
   const date = new Date().toJSON();
 
   const handleClick = async () => {
     // const {url} = {...petUrl}
-    const url =
-      "https://vivoverde.com.br/wp-content/uploads/2010/02/sphynx_cats_1a_thumb.jpg";
+    const url ="https://vivoverde.com.br/wp-content/uploads/2010/02/sphynx_cats_1a_thumb.jpg";
     const location = {
       latitude: latitude,
       longitude: longitude,
@@ -53,6 +56,7 @@ const AddPet = () => {
     ) {
       await axios
         .post(`${Api}/pets`, {
+          id: 0,
           description: description,
           color: Cor,
           specie: especie,
@@ -61,6 +65,7 @@ const AddPet = () => {
           location: location,
           images: [url],
           status: status.toUpperCase(),
+          user:{ id: 2}
         })
         .then((res) => {
           console.log(res);

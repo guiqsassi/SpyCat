@@ -17,10 +17,11 @@
     min-height: 180px;
     min-width: 280px;
     /* max-height: 180px; */
-    background-size: cover;
+    background-size:cover;
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 3px 3px 0px 0px;
+    
 }
 .viewMore{
     width: 100%;

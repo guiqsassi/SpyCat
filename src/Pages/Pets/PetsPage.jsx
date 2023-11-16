@@ -11,6 +11,7 @@ import markerIcon from "../../Components/Map/MarkerIcon";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Map from "../../Components/Map/Map";
+import { UseSelector } from "react-redux/es/hooks/useSelector";
 import { useSearchParams } from "react-router-dom";
 import { BiSolidXCircle } from "react-icons/bi";
 import seta from "../../images/seta.png"
@@ -18,6 +19,7 @@ import { useDispatch } from "react-redux";
 import Select from "../../Components/Select/Select";
 import Api from "../../Api/Api";
 import favMarkedIMG from "../../images/favMarked.png"
+import Comment from "../../Components/Comment/Comment";
 
 const PetsPage = ()=>{
     const dispatch = useDispatch()
@@ -33,7 +35,14 @@ const PetsPage = ()=>{
     const [viewRescueModal, setViewRescueModal] = useState("none")
     const [viewEncounterModal, setViewEncounterModal] = useState("none")
     const [favMarked, setFavMarked] = useState(false)
-    
+
+    const [commentText, setCommentText] = useState("")
+    const [comments, setComments] = useState("")
+    const date = new Date().toJSON();
+
+    const {userID} = useSelector(state => state.userReducer)
+    console.log(userID);
+
 
     console.log(position);
     const handleFavMarked = ()=>{
@@ -55,22 +64,27 @@ const PetsPage = ()=>{
             setViewEncounterModal("none")
         }
     }
-
+        const getPets = async()=>{
+                await axios.get(`${Api}/pets/${id}`).then((res)=>{
+                    setPet(res.data)
+                    setMarker(res.data.locations)
+                    setPosition([res.data.locations[0].latitude, res.data.locations[0].longitude])
+                    setBigImage(res.data.images[0])
+                    setComments(res.data.comments)
+                    dispatch({
+                        type: "newPosition",
+                        payload:{
+                            position: [res.data.locations[0].latitude, res.data.locations[0].longitude]
+                        }
+                    })
+                    console.log(res.data);
+                    setArrayImageCat([res.data.url,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://assets-au-01.kc-usercontent.com/ab37095e-a9cb-025f-8a0d-c6d89400e446/9749fcd8-168c-4b1b-979c-f162c491b7c2/article-the-daily-activities-of-your-cat.jpg"])
+                })
+        }
       useEffect(
         ()=>{
-            axios.get(`${Api}/pets/${id}`).then((res)=>{
-                setPet(res.data)
-                setMarker(res.data.locations)
-                setPosition([res.data.locations[0].latitude, res.data.locations[0].longitude])
-                setBigImage(res.data.images[0])
-                dispatch({
-                    type: "newPosition",
-                    payload:{
-                        position: [res.data.locations[0].latitude, res.data.locations[0].longitude]
-                    }
-                })
-                setArrayImageCat([res.data.url,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://assets-au-01.kc-usercontent.com/ab37095e-a9cb-025f-8a0d-c6d89400e446/9749fcd8-168c-4b1b-979c-f162c491b7c2/article-the-daily-activities-of-your-cat.jpg"])
-            })
+
+            getPets()
         }
       ,[])
         const handleClickUp = ()=>{
@@ -80,7 +94,22 @@ const PetsPage = ()=>{
             imageCollunm.current.scrollTop += imageCollunm.current.offsetHeight
         }
 
-        
+        const handleClickCommentCreate= async()=>{
+            await axios.post(`${Api}/comments`, {
+                user:{ id: userID
+                },
+                pet: {
+                    id: pet.id
+                },
+                text: commentText,
+                date: date 
+            }).then((res)=>{
+                console.log(res.data);
+                getPets()
+            })
+
+        }
+            
     return(
         <section className="petsSection">
         
@@ -111,7 +140,7 @@ const PetsPage = ()=>{
                    
                    <div className="petData">
                         <div className="cadBy">
-                            <p>Cadastrado por: User</p>
+                            <p>Cadastrado por: {pet.user.username}</p>
                         </div>
                         <div className="favoritar" onClick={handleFavMarked}>
                             {favMarked?
@@ -161,11 +190,17 @@ const PetsPage = ()=>{
                 </div>
                 <div className="input">
                 <label>Compartilhe suas descobertas!!</label>
-                <Input textArea={true} placeholder="sua mensagem"></Input>
-                <ButtonForms name="Enviar"></ButtonForms>
+                <Input textArea={true} value={commentText} setValue={setCommentText} placeholder="sua mensagem"></Input>
+                <ButtonForms name="Enviar" onClick={handleClickCommentCreate}></ButtonForms>
                 </div>
-                <div className="lastMessage">
-
+                <div className="Comments">
+                {comments?
+                comments.map((comment)=>{
+                    return <Comment url={comment.user.icon} username={comment.user.username} text={comment.text}></Comment>
+                })
+                :
+                null
+                }
                 </div>
             </div>
 
