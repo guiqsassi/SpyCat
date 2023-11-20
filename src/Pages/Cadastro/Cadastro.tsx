@@ -8,6 +8,7 @@ import user from "../../images/user.png"
 import cadeado from "../../images/cadeado.png"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import Api from "../../Api/Api"
 const Cadastro = ()=>{
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -16,18 +17,11 @@ const Cadastro = ()=>{
 
     const handleClickRegister = async()=>{
       await axios.post("http://localhost:8080/users",{
+      id: 0,
       username: name,
       email: email,
       password: password
-    })
-      await axios({
-
-        data: {
-            username: name,
-            email: email,
-            password: password
-        }
-      }).then((res)=> console.log(res)
+    }).then((res)=> console.log(res)
         )
         navigate("/home")
     }

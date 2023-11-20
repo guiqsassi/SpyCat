@@ -66,7 +66,7 @@ const OngCad = () => {
             <h1>Novo Pet</h1>
           </div>
           <div className="bannerContent">
-            <div className="BannerInputs">
+            <div className="OngBannerInputs">
               <Input name={"Nome Fantasia"}  placeholder={"Nome Fantasia"} value={nomeFantasia} setValue={setNomeFantasia}></Input>
               <Input name={"Cnpj"} placeholder={"Cnpj"} value={cnpj} setValue={setCnpj}></Input>
               <Input name={"Telefone"} placeholder={"Telefone"} value={telefone} setValue={setTelefone}></Input>

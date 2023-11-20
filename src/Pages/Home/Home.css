@@ -171,3 +171,8 @@ font-weight: 600;
         /* align-items: start; */
     }
 }
+@media (max-height: 800px){
+    .tittle h1{
+        font-size: 40px;
+    }
+}

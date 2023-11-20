@@ -125,7 +125,9 @@ const User = () => {
             <div className="userInformation">
                 
                 {user?
-                <img src="https://pbs.twimg.com/profile_images/1564084321098629122/JljknKFp_400x400.jpg" className="userIcon"/>
+                user.icon?
+                <img src={user.icon} className="userIcon"/>
+            : <BiUserCircle size={120} color="#F98AAE"></BiUserCircle>
             : <BiUserCircle size={120} color="#F98AAE"></BiUserCircle>    
             }
                 

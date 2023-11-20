@@ -183,6 +183,11 @@ font-style: normal;
 font-weight: 700;
 line-height: normal;
 }
+@media(max-height: 800px){
+    .petAbout{
+        height: 120vh;
+    }
+}
 @media (max-width: 1300px) {
     .imageSection{
         width: 60%;

@@ -1,6 +1,6 @@
 .addPet{
     width: 100%;
-    min-height: 100vh;
+    height: auto;
     background-color: #F6F6F6;
     display: flex;
     align-items: center;
@@ -8,14 +8,14 @@
 }
 .petCreateContainer{
     width: 70%;
-    /* min-height: 130vh; */
+    height: auto;
     display: flex;
     align-items: center;
 }
 .banner{
     width: 100%;
     border-radius: 10px;
-    /* height: 80%; */
+    height: 130vh;
     background-color: white;
 }
 .bannerTittle{
@@ -33,14 +33,14 @@ line-height: normal;
 }
 .bannerContent{
     width: 100%;
-    height: 80%;
+    height: 100vh;
     padding-left: 10%;
     display: flex;
     flex-direction: row;
 }
 .BannerInputs{
     width: 50%;
-    height: 100%;
+    /* height: 100vh; */
 }
 .cadType h3{
     color: #4A2C36;
@@ -79,6 +79,7 @@ line-height: 131.523%; /* 21.044px */
     width: 40%;
     height: 60vh;
     display: flex;
+    gap: 40px;
     align-items: center;
     flex-direction: column;
     justify-content: space-around;

@@ -8,8 +8,8 @@
     cursor: pointer;
 }
 .file{
-    height: 200px;
-    width: 350px;
+    height: 80%;
+    width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;

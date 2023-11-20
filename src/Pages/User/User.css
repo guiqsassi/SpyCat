@@ -1,6 +1,8 @@
 .userIcon{
     border-radius: 100%;
     max-width:150px ;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 .userInformation{
     width: 100%;

@@ -24,7 +24,8 @@
     cursor: pointer;
 }
 .logoImg{
-    max-width: 120px;
+    max-width: 100px;
+    width: 60%;
     cursor: pointer;
 
 }
