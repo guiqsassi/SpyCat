@@ -2,9 +2,9 @@ import "./AddPet.css";
 import NavSlide from "../../Components/NavSlide/NavSlide";
 import Input from "../../Components/Input/Input";
 import "leaflet/dist/leaflet.css";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import UploadWidget from "../../Components/UploadWidged/UploadWidget";
-
+import { BiSolidXCircle } from "react-icons/bi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ButtonForms from "../../Components/ButtonForms/ButtonForms";
@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import Select from "../../Components/Select/Select";
 import Api from "../../Api/Api";
 import Map from "../../Components/Map/Map";
+import { image } from "@cloudinary/url-gen/qualifiers/source";
 
 const AddPet = () => {
   const navigate = useNavigate();
@@ -25,19 +26,38 @@ const AddPet = () => {
   const [status, setStatus] = useState("");
   const [view, setView] = useState("");
 
+  const [urlArray, setUrlArray] = useState([
+    "http://res.cloudinary.com/guiqsassi/image/upload/v1700584660/gmyqcfo6rmseorwkmtjo.png",
+    "http://res.cloudinary.com/guiqsassi/image/upload/v1700584712/pgy1uqncyy7wjv4mspho.png"
+]);
+
   const { city, state, type, latitude, longitude } = useSelector(
     (state) => state.mapReducer
   );
   const { userID } = useSelector(
     (state) => state.userReducer
   );
+  
+  const {url}  = useSelector(
+    (state) => state.petReducer
+  );
+    // console.log(url);
+
+
+  useEffect(
+    ()=>{
+      if(url != "" && !urlArray.includes(url)){
+        setUrlArray([...urlArray, url])
+        console.log(url);
+      }
+    }
+  ,[url])
 
 
 
   const date = new Date().toJSON();
 
   const handleClick = async () => {
-    // const {url} = {...petUrl}
     const url ="https://vivoverde.com.br/wp-content/uploads/2010/02/sphynx_cats_1a_thumb.jpg";
     const location = {
       latitude: latitude,
@@ -53,7 +73,11 @@ const AddPet = () => {
       Cor !== "" &&
       especie !== "" &&
       status !== ""
-    ) {
+    ) 
+    
+    {
+      console.log(urlArray)
+
       await axios
         .post(`${Api}/pets`, {
           id: 0,
@@ -63,7 +87,7 @@ const AddPet = () => {
           city: city,
           state: state,
           location: location,
-          images: [url],
+          images: urlArray,
           status: status.toUpperCase(),
           user:{ id: 2}
         })
@@ -73,6 +97,13 @@ const AddPet = () => {
     }
     navigate("/home");
   };
+  const handleClickDeletePetImage = (Image)=>{
+    console.log(Image);
+    const index = urlArray.filter((url)=>
+      url !== Image
+    )
+    setUrlArray(index)
+  }
 
   return (
     <section className="addPet">
@@ -132,6 +163,25 @@ const AddPet = () => {
             </div>
             <div className="imagesMaps">
               <UploadWidget></UploadWidget>
+              <div className="imagesSelection">
+                
+              {urlArray[0]?
+              urlArray.map((image)=>{
+                return(
+                  <>
+                  <div className="uploadedImageView">
+                  <BiSolidXCircle className="deleteImage" color="F98AAE" onClick={()=>{
+                    handleClickDeletePetImage(image)
+                  }} size={25} style={{cursor: "pointer"}} ></BiSolidXCircle>
+                  <img src={image} alt="" />
+                  </div>
+                  </>
+                )
+              })
+              :null
+              
+            }
+              </div>
               <Map findUser={true} placeMarker={true}></Map>
             </div>
           </div>

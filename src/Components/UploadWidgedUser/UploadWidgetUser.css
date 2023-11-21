@@ -20,7 +20,7 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-.labelUpload{
+.labelUploadUser{
 
  
     color: #4A2C36;
@@ -46,6 +46,6 @@ line-height: 131.523%; /* 18.413px */
     align-items: center;
     flex-direction: column;
 }
-.addImg{
+.addImgUser{
     max-width: 40px;
 }

@@ -1,6 +1,7 @@
 .addPet{
     width: 100%;
-    height: auto;
+    height: 100%;
+    min-height: 100vh;
     background-color: #F6F6F6;
     display: flex;
     align-items: center;
@@ -15,7 +16,7 @@
 .banner{
     width: 100%;
     border-radius: 10px;
-    height: 130vh;
+    /* height: 130vh; */
     background-color: white;
 }
 .bannerTittle{
@@ -50,18 +51,7 @@ font-style: normal;
 margin: 0;
 font-weight: 600;
 }
-.checkboxes{
-    width: 50%;
-    min-width: 200px;
-    margin: 3% 0 5% 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.campoCheckBox{
-    display: flex;
-    align-items: center;
-}
+
 .cadType label{
     color: #4A2C36;
 font-family: Open Sans;
@@ -77,7 +67,7 @@ line-height: 131.523%; /* 21.044px */
  }   
 .imagesMaps{
     width: 40%;
-    height: 60vh;
+    /* height: auto; */
     display: flex;
     gap: 40px;
     align-items: center;
@@ -95,12 +85,37 @@ line-height: 131.523%; /* 21.044px */
     align-items: center;
     justify-content: center;
 }
+.imagesSelection{
+    width: 65%;
+    min-height: 200px;
+    border: 2px solid #F98AAE;
+    display: flex;
+    padding: 20px;
+    gap: 20px
+}
+
+.uploadedImageView{
+    min-height: 80px;
+    display: flex;
+    position: relative;
+    border: 2px solid #F98AAE;
+    width: 100px;
+    height: 50px;
+    ;
+}
+.deleteImage{
+    position: absolute;
+    z-index: 5;
+    top: -15px;
+    right: -15px;
+}
+.uploadedImageView > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 @media (max-Width: 1300px) {
- .mapAdd{
-    max-height: 200px;
-    max-width: 300px;
-    z-index:0
- }   
+
  .petCreateContainer{
     width: 90%;
  }

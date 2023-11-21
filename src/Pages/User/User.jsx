@@ -116,6 +116,9 @@ const User = () => {
             icon: userIconUrl,
             password: password
 
+        }).then((res)=>{
+            setDisplay("none")
+            getUser()
         })
     }
     return (

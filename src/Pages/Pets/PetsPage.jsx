@@ -20,6 +20,7 @@ import Select from "../../Components/Select/Select";
 import Api from "../../Api/Api";
 import favMarkedIMG from "../../images/favMarked.png"
 import Comment from "../../Components/Comment/Comment";
+import markerIconOng from "../../Components/Map/MarkerIconOng";
 
 const PetsPage = ()=>{
     const dispatch = useDispatch()
@@ -35,6 +36,7 @@ const PetsPage = ()=>{
     const [viewRescueModal, setViewRescueModal] = useState("none")
     const [viewEncounterModal, setViewEncounterModal] = useState("none")
     const [favMarked, setFavMarked] = useState(false)
+    const [ongs, setOngs] = useState()
 
     const [commentText, setCommentText] = useState("")
     const [comments, setComments] = useState("")
@@ -78,12 +80,21 @@ const PetsPage = ()=>{
                         }
                     })
                     console.log(res.data);
-                    setArrayImageCat([res.data.url,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl8SC76eRU3DWifJRqv3-PKZXTPWIBuFmxiw&usqp=CAU","https://assets-au-01.kc-usercontent.com/ab37095e-a9cb-025f-8a0d-c6d89400e446/9749fcd8-168c-4b1b-979c-f162c491b7c2/article-the-daily-activities-of-your-cat.jpg"])
+                    setArrayImageCat([...res.data.images])
+
                 })
+        }
+        const getOngs = async ()=>{
+            await axios.get(`${Api}/ongs`).then((res)=>{
+                setOngs(res.data)
+                
+                console.log(res.data);
+
+            })
         }
       useEffect(
         ()=>{
-
+            getOngs()
             getPets()
         }
       ,[])
@@ -122,17 +133,25 @@ const PetsPage = ()=>{
                         <img src={bigImage} alt="" />
                     </div>
                     <div className="Collunm" >
-                        <img src={seta} style={{maxWidth: "24px", transform: "scaleY(-1)", cursor: "pointer", marginBottom: "5px"}} onClick={handleClickUp} alt="" />
+                        {arrayImageCat[3]?
+                            <img src={seta} style={{maxWidth: "24px", transform: "scaleY(-1)", cursor: "pointer", marginBottom: "5px"}} onClick={handleClickUp} alt="" />
+                        :null
+                    }
                     <div className="imagesCollums" ref={imageCollunm}>
                     {arrayImageCat? arrayImageCat.map((imag)=>{
                         return(
+                            <>
+                            
                             <img src={imag} className="imgCollunmSon" onClick={()=>{setBigImage(imag)}} alt="" />
+                            </>
                         )
                     }): null
                     }
                     </div>
-
-                    <img src={seta} style={{maxWidth: "24px", cursor: "pointer",  marginTop: "5px"}} onClick={handleClickBottom}  alt="" />
+                    {arrayImageCat[3]?
+                        <img src={seta} style={{maxWidth: "24px", cursor: "pointer",  marginTop: "5px"}} onClick={handleClickBottom}  alt="" />
+                        :null
+                    }
                     </div>
                     
                     
@@ -160,7 +179,13 @@ const PetsPage = ()=>{
                              </Marker>
                         
                     }): null}
-
+                    {ongs? 
+                    ongs.map((ong)=>{
+                        return <Marker icon={markerIconOng} position={[ong.location.latitude, ong.location.longitude]}>
+                        <Popup>{ong.tradingName}</Popup>
+                     </Marker>
+                    }):null
+                }
                  </Map>
                     </div>
                 </div>

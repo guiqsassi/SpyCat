@@ -10,6 +10,9 @@
 .file{
     height: 80%;
     width: 80%;
+    min-height: 200px;
+    max-width: 300px;
+    max-height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,6 +38,7 @@ line-height: 131.523%; /* 18.413px */
     border: 2px dashed #F98AAE;
     height: 200px;
     width: 350px;
+    object-fit: contain;
     
 }
 .formCenter{
@@ -46,4 +50,7 @@ line-height: 131.523%; /* 18.413px */
 }
 .addImg{
     max-width: 40px;
+}
+.loading{
+
 }

@@ -39,8 +39,8 @@ const UploadWidgetUser = () => {
             uploadImage(e.target.files)
         }}/>
         <div className="formCenter">
-        <label className="labelUpload" style={resImg?  {color: "white"} : null }> Enviar imagem</label>
-        <img src={add} className="addImg" />
+        <label className="labelUploadUser" style={resImg?  {color: "white"} : null }> Enviar imagem</label>
+        <img src={add} className="addImgUser" />
         </div>
         </form>
 

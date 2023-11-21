@@ -54,7 +54,7 @@ line-height: normal;
     max-width: 350px;
     z-index:0;
  }   
-.imagesMaps{
+.OngMaps{
     width: 40%;
     height: 60vh;
     display: flex;
@@ -74,11 +74,7 @@ line-height: normal;
     justify-content: center;
 }
 @media (max-Width: 1300px) {
- .mapAdd{
-    max-height: 200px;
-    max-width: 300px;
-    z-index:0
- }   
+ 
  .petCreateContainer{
     width: 90%;
  }

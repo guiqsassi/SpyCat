@@ -74,7 +74,7 @@ const OngCad = () => {
 
              
             </div>
-            <div className="imagesMaps">
+            <div className="OngMaps">
               <Map placeMarker={true}></Map>
             </div>
           </div>
