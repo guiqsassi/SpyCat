@@ -21,7 +21,7 @@ const Ong = ()=>{
                 </div>
             </div>
             <div className="background">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="460" viewBox="0 0 1920 460" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 460" fill="none">
                 <path d="M-5 465V185.433L1920 0V465H-5Z" fill="#FFD8E5" fill-opacity="1"/>
             </svg>
             </div>

@@ -35,8 +35,8 @@ line-height: normal;
 .bannerContent{
     width: 100%;
     height: 100vh;
-    padding-left: 10%;
     display: flex;
+    justify-content: center;
     flex-direction: row;
 }
 .BannerInputs{
@@ -119,4 +119,27 @@ line-height: 131.523%; /* 21.044px */
  .petCreateContainer{
     width: 90%;
  }
+}
+@media (max-Width: 700px){
+    .bannerContent{
+        flex-direction: column;
+     }
+    .BannerInputs{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }     
+    .checkboxes{
+        width: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .TypeTittle{
+        text-align: center;
+    }
+    .imagesMaps{
+        width: 100%;
+    }
 }

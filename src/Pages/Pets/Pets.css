@@ -155,9 +155,9 @@ line-height: normal;
     cursor: pointer;
 }
 .comentarios{
-    width: 60%;
+    /* width: 60%; */
     min-height: 80vh;
-    margin-left: 10%;
+    padding-left: 10%;
     margin-top: 5%;
 
 }
@@ -314,3 +314,56 @@ line-height: normal;
     gap: 20px;
     flex-direction: column;
 }
+@media(max-Width: 1000px){
+    .petInfo{
+        flex-direction: column;
+        height: auto;
+    }
+    .imageSection{
+        width: 100%;
+        
+    }
+    .images{
+        align-items: center;
+        justify-content: center;
+    }
+    .petData{
+        align-items: center;
+        justify-content: center;
+    }
+    .map{
+        width: 100%;
+    }
+    .petAbout{
+        width: 100%;
+    }
+    .petInfo{
+        gap: 30px;
+    }
+    .rescueModalContainer{
+        width: 80%;
+    }
+}
+@media(max-Width: 1000px){
+    .images{
+        margin-top: 6vh;
+        flex-direction: column;
+        min-width: 0;
+    }
+    .Collunm{
+        display: flex;
+        min-height: 100px;
+        min-width: 50%;
+        max-width: 0;
+        width: auto;
+        flex-direction: row;
+    }
+    .imagesCollums{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        overflow-x:scroll;
+        gap: 10px;
+    }
+  
+}  

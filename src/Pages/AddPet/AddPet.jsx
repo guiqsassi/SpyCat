@@ -73,7 +73,7 @@ const AddPet = () => {
       description !== "" &&
       Cor !== "" &&
       especie !== "" &&
-      status !== "Abandonado"
+      status == "Abandonado"
     ) 
     {
       console.log(urlArray)
@@ -87,14 +87,23 @@ const AddPet = () => {
           city: city,
           state: state,
           location: location,
-          images: urlArray,
+          images: 
+            urlArray.map((url)=>{
+              return ({
+                
+                url: url,
+                date: date
+              })
+            })
+          ,
           status: status.toUpperCase(),
-          user:{ id: 2}
+          user:{ id: userID}
         })
         .then((res) => {
           console.log(res.data);
         });
     }
+    
     else if(
       type.toLocaleLowerCase() !== "ocean" &&
       latitude &&
@@ -125,7 +134,7 @@ const AddPet = () => {
         console.log(res.data);
       });
     }
-    navigate("/home");
+    // navigate("/home");
   };
   const handleClickDeletePetImage = (Image)=>{
     console.log(Image);

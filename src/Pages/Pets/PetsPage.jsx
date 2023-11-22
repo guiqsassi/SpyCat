@@ -20,9 +20,11 @@ import Select from "../../Components/Select/Select";
 import Api from "../../Api/Api";
 import favMarkedIMG from "../../images/favMarked.png"
 import Comment from "../../Components/Comment/Comment";
-import markerIconOng from "../../Components/Map/MarkerOngIcon";
+import { async } from "q";
+import { useNavigate } from "react-router-dom";
 
 const PetsPage = ()=>{
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const imageCollunm = useRef()
     const [bigImage, setBigImage] = useState()
@@ -72,7 +74,7 @@ const PetsPage = ()=>{
                     setPet(res.data)
                     setMarker(res.data.locations)
                     setPosition([res.data.locations[0].latitude, res.data.locations[0].longitude])
-                    setBigImage(res.data.images[0])
+                    setBigImage(res.data.images[0].url)
                     setComments(res.data.comments)
                     dispatch({
                         type: "newPosition",
@@ -87,7 +89,7 @@ const PetsPage = ()=>{
                     const dataCerta = new Date(res.data.locations[indexOfLastElement].date) 
                     setData(dataCerta.getDate() + "/" + dataCerta.getMonth() +"/" + dataCerta.getFullYear())
                     
-                    setArrayImageCat([...res.data.images])
+                    setArrayImageCat(res.data.images.map(url=>url.url))
 
                 })
         }
@@ -126,6 +128,14 @@ const PetsPage = ()=>{
                 getPets()
             })
 
+        }
+        const handleClickRescue = async()=>{
+            await axios.post(`${Api}/pets/rescue`, {
+                id: pet.id,
+                status: "RESGATADO"
+            }).then((res)=>{
+                navigate("/home")
+            })
         }
             
     return(
@@ -188,7 +198,7 @@ const PetsPage = ()=>{
                     }): null}
                     {ongs? 
                     ongs.map((ong)=>{
-                        return <Marker icon={markerIconOng} position={[ong.location.latitude, ong.location.longitude]}>
+                        return <Marker icon={markerIcon} position={[ong.location.latitude, ong.location.longitude]}>
                         <Popup>{ong.tradingName}</Popup>
                      </Marker>
                     }):null
@@ -255,7 +265,7 @@ const PetsPage = ()=>{
             </div>
             <div className="rescueModalActions">
             <Select options={["Encontrado", "Levado até Ong"]}></Select>
-                <ButtonForms name="Enviar"></ButtonForms>
+                <ButtonForms name="Enviar" onClick={handleClickRescue}></ButtonForms>
 
             </div>
             </div>

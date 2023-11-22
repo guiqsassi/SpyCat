@@ -17,7 +17,10 @@ const Home = ()=>{
     
     useEffect(
         ()=>{
-            axios.get(Api+ "/pets").then(res=> setPets(res.data))
+            axios.get(Api+ "/pets").then((res)=> {
+                setPets(res.data)
+                 console.log(res.data);
+                })
         }
     ,[])
     return(
@@ -97,9 +100,13 @@ const Home = ()=>{
                 <div className="petsWrap">
                     {pets? pets.map((pet)=>{
                         
-                        return(
-                            <PetView image={pet.images} pet={pet}></PetView>
-                        )
+                        if(pet.images){
+
+                            return <PetView image={pet.images[0].url} pet={pet}></PetView>
+                        }
+                        
+                        
+                        
                     })
                     : null}
                 </div>
