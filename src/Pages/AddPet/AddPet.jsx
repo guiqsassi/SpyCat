@@ -60,6 +60,7 @@ const AddPet = () => {
   const handleClick = async () => {
     const url ="https://vivoverde.com.br/wp-content/uploads/2010/02/sphynx_cats_1a_thumb.jpg";
     const location = {
+      id: 0,
       latitude: latitude,
       longitude: longitude,
       date: date,
@@ -72,9 +73,8 @@ const AddPet = () => {
       description !== "" &&
       Cor !== "" &&
       especie !== "" &&
-      status !== ""
+      status !== "Abandonado"
     ) 
-    
     {
       console.log(urlArray)
 
@@ -92,8 +92,38 @@ const AddPet = () => {
           user:{ id: 2}
         })
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
         });
+    }
+    else if(
+      type.toLocaleLowerCase() !== "ocean" &&
+      latitude &&
+      url !== "" &&
+      description !== "" &&
+      Cor !== "" &&
+      especie !== "" &&
+      status !== "Perdido" &&
+      email !== "" &&
+      telefone !== ""
+    ){
+      await axios
+      .post(`${Api}/lostPets`, {
+        id: 0,
+        description: description,
+        color: Cor,
+        specie: especie,
+        city: city,
+        state: state,
+        location: location,
+        images: urlArray,
+        status: status.toUpperCase(),
+        user:{ id: 2},
+        phone: telefone,
+        email: email
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
     }
     navigate("/home");
   };

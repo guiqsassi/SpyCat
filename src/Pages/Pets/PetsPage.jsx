@@ -20,7 +20,7 @@ import Select from "../../Components/Select/Select";
 import Api from "../../Api/Api";
 import favMarkedIMG from "../../images/favMarked.png"
 import Comment from "../../Components/Comment/Comment";
-import markerIconOng from "../../Components/Map/MarkerIconOng";
+import markerIconOng from "../../Components/Map/MarkerOngIcon";
 
 const PetsPage = ()=>{
     const dispatch = useDispatch()
@@ -37,6 +37,7 @@ const PetsPage = ()=>{
     const [viewEncounterModal, setViewEncounterModal] = useState("none")
     const [favMarked, setFavMarked] = useState(false)
     const [ongs, setOngs] = useState()
+    const [data, setData] = useState()
 
     const [commentText, setCommentText] = useState("")
     const [comments, setComments] = useState("")
@@ -80,6 +81,12 @@ const PetsPage = ()=>{
                         }
                     })
                     console.log(res.data);
+                    const indexOfLastElement = res.data.locations.length-1;
+                    console.log();
+                    console.log(res.data.locations[indexOfLastElement].date);
+                    const dataCerta = new Date(res.data.locations[indexOfLastElement].date) 
+                    setData(dataCerta.getDate() + "/" + dataCerta.getMonth() +"/" + dataCerta.getFullYear())
+                    
                     setArrayImageCat([...res.data.images])
 
                 })
@@ -199,7 +206,7 @@ const PetsPage = ()=>{
                         <label>Cor</label>
                         <div className="campoTexto">{pet.color}</div>    
                         <label>Data de encontro</label>
-                        <div className="campoTexto"></div>    
+                        <div className="campoTexto">{data? data: null}</div>    
                         </div>
                     </div>
                         <ButtonForms onClick={handleModalRescueClick} name="Resgatar Pet"></ButtonForms>

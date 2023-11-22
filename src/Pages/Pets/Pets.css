@@ -84,20 +84,22 @@
     max-width: 80%;
     max-height: 100px;
     max-width: 100px;
+    background-color: rgb(99, 99, 99);
+
 }
 .petAbout{
     width: 50%;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
     flex-direction: column;
     gap: 10px;
 }
 .infoBanner{
 
  width: 60%;
- height: 69%;
+ /* height: 69%; */
  min-height: 500px;
  background-color: #dfdfdf;
  
@@ -109,6 +111,7 @@ flex-shrink: 0;
 border-radius: 5px;
 background: #FFF;
 margin-bottom: 2%;
+padding: 10px 0 0 10px;
 }
 .campoTextoDescricao{
     width: 80%;
@@ -116,6 +119,8 @@ margin-bottom: 2%;
     flex-shrink: 0;
     border-radius: 5px;
     background: #FFF;
+    padding: 10px 0 0 10px;
+
     margin-bottom: 2%;
 }
 .bannerCotent{

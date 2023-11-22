@@ -33,7 +33,8 @@ const NavSlide = (props:NavProps)=>{
 }
 
     const userID = useSelector((state: RootState) => state.userReducer.userID);
-
+    const userIconUrl = useSelector((state: RootState) => state.userReducer.userIconUrl)
+    
     return (
         <div className="navContainer">
         <header className="navInside">
@@ -46,7 +47,12 @@ const NavSlide = (props:NavProps)=>{
         <BiMap size={35} color="#F98AAE"></BiMap>
         <p>Florianópolis - Sc</p>
         </div>
-        <BiUserCircle size={40} color="#F98AAE"></BiUserCircle>
+        {userIconUrl? 
+        <img src={userIconUrl} className="userIcon" alt="" />    
+    :
+    <BiUserCircle size={40} color="#F98AAE"></BiUserCircle>
+    
+    }
         </div>
         </header>
         <div className="slide" style={{transform:`translateX(${slideView})` }}>

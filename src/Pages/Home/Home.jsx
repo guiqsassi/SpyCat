@@ -78,17 +78,6 @@ const Home = ()=>{
                             <p>Outro</p>
                         </li>
                     </ul>
-                    <h5>Raça</h5>
-                    <ul>
-                        <li>
-                            <input type="checkbox" />
-                            <p>Vira-lata</p>
-                        </li>
-                        <li>
-                            <input type="checkbox" />
-                            <p>Outro</p>
-                        </li>
-                    </ul>
                     <h5>Cor</h5>
                     <ul>
                         <li>

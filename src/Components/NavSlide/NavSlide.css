@@ -7,6 +7,10 @@
     justify-content: space-between;
 
 }
+.userIcon{
+    border-radius: 100%;
+    width: 14%;
+}
 .slide{
     width: 12%;
     height: 93%;
