@@ -22,6 +22,7 @@ import favMarkedIMG from "../../images/favMarked.png"
 import Comment from "../../Components/Comment/Comment";
 import { async } from "q";
 import { useNavigate } from "react-router-dom";
+import markerIconOng from "../../Components/Map/MarkerOngIcon";
 
 const PetsPage = ()=>{
     const navigate = useNavigate()
@@ -198,7 +199,7 @@ const PetsPage = ()=>{
                     }): null}
                     {ongs? 
                     ongs.map((ong)=>{
-                        return <Marker icon={markerIcon} position={[ong.location.latitude, ong.location.longitude]}>
+                        return <Marker icon={markerIconOng} position={[ong.location.latitude, ong.location.longitude]}>
                         <Popup>{ong.tradingName}</Popup>
                      </Marker>
                     }):null
