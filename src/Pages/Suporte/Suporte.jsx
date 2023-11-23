@@ -1,7 +1,7 @@
 import "./Suporte.css"
 import Input from "../../Components/Input/Input"
 import ButtonForms from "../../Components/ButtonForms/ButtonForms"
-import planeGuy from "../../images/TorresGemeas.png"
+import planeGuy from "../../images/AirplaneGuy.png"
 import NavSlide from "../../Components/NavSlide/NavSlide"
 import { useState, useRef } from "react"
 import NotificationError from "../../Components/Notification/NotificationError"

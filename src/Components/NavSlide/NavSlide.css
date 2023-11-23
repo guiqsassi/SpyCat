@@ -74,7 +74,7 @@ line-height: normal;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 5%;
 }
 .navSlide{
@@ -82,7 +82,7 @@ line-height: normal;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 5%;
 
 }
@@ -110,7 +110,7 @@ nav {
 .slide ul{
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 0;
     }
 .slide p{

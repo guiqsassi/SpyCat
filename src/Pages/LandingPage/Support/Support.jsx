@@ -1,7 +1,7 @@
 import "./Support.css"
 import Input from "../../../Components/Input/Input"
 import ButtonForms from "../../../Components/ButtonForms/ButtonForms"
-import planeGuy from "../../../images/TorresGemeas.png"
+import planeGuy from "../../../images/AirplaneGuy.png"
 import { useState, useRef } from "react"
 import NotificationError from "../../../Components/Notification/NotificationError"
 import NotificationOkay from "../../../Components/Notification/NotificationOkay"
@@ -18,7 +18,7 @@ const Support = ()=>{
 
     const sendEmail = (e) => {
       e.preventDefault();
-      if(name != "" && email!= ""&& message != ""){
+      if(name !== "" && email!== ""&& message !== ""){
       emailjs.sendForm('service_1ivi5yg', 'template_r3qrv95', form.current, 'Ho6N_yBd1QwlMUZ7K')
         .then((result) => {
             console.log(result.text);

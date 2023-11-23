@@ -67,7 +67,7 @@ line-height: normal;
     width: 90%;
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
 }
 .tittlePets h3{
     color: #4A2C36;

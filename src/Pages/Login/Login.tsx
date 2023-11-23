@@ -1,24 +1,18 @@
-import "./Login.css"
-import { ChangeEvent, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import Input from "../../Components/Input/Input"
-import ButtonForms from "../../Components/ButtonForms/ButtonForms"
-import { useDispatch } from "react-redux"
-import rootReducer from "../../Redux/rootReducer"
-import { RootState } from "../../Redux/rootReducer"
-import { useSelector } from "react-redux"
-import { MouseEvent } from "react"
 import axios from "axios"
+import { MouseEvent, useState } from "react"
+import { useDispatch } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
 import Api from "../../Api/Api"
+import ButtonForms from "../../Components/ButtonForms/ButtonForms"
+import Input from "../../Components/Input/Input"
+import "./Login.css"
 const Login = () =>{
-    const [name, setName] = useState("")
     const [error, setError] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {logged} = useSelector((rootReducer: RootState) => rootReducer.userReducer)
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>)=>{
         e.preventDefault()
@@ -37,6 +31,7 @@ const Login = () =>{
                     token: res.data.token
                 }
             })
+            localStorage.setItem("token", res.data.token)
             navigate("/home")
         }).catch((err)=>{
             setError(true)
