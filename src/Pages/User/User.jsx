@@ -19,7 +19,7 @@ const User = () => {
     const {userIconUrl} = useSelector((state)=>state.userReducer)
     const {userID} = useSelector((state)=> state.userReducer)
     console.log(userID);
-
+    const [deleteModal, setDeleteModal] = useState("none")
     const [searchParams] = useSearchParams()
     const [estado, setEstado] = useState()
     const [cidades, setCidades] = useState([])
@@ -30,6 +30,9 @@ const User = () => {
     const [name, setName] = useState("")    
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    const [deletePassword, setDeletePassword] = useState("")
+
     const couroselfav = useRef(null)
     const courosel = useRef(null)
     const [user, setUser] = useState()
@@ -119,6 +122,19 @@ const User = () => {
         }).then((res)=>{
             setDisplay("none")
             getUser()
+        })
+    }
+
+    const handleDeleteClick = async()=>{
+        await axios(
+            {   
+                method: "delete",
+                url:`${Api}/users/${userID}`,
+                params: {
+                    password: deletePassword
+                }
+    }).then((res)=>{
+            console.log(res);
         })
     }
     return (
@@ -211,9 +227,23 @@ const User = () => {
                         <Select label={"Estado"} defaultValue={"Insira o seu estado"} onChange={handleStateSelected} options={ siglasEstadosBrasil}/>
                         <Select dataList={true} list="cidades" label={"Cidade"} defaultValue={"Insira o seu estado"} onChange={(e)=>{setCidade(e.target.value)}} options={ cidades}/>
                     <ButtonForms name="atualizar" onClick={handleUpdateClick}></ButtonForms>
+                    <ButtonForms name="deletar" onClick={handleUpdateClick}></ButtonForms>
                     </div> 
                 </div>
             </div>
+
+        <div className="modalDelete">
+            <div className="deleteModalContainer">
+                <div className="modalDeleteTittle">
+                    <h1>Está certo disso?</h1>
+                </div>
+                <div className="inputDelete">
+                    <Input name={"senha"} value={deletePassword} setValue={setDeletePassword}></Input>
+                    <ButtonForms delete={true} onClick={handleDeleteClick} name="confirmar"></ButtonForms>
+                    <ButtonForms name="cancelar"></ButtonForms>
+                </div>
+            </div>
+        </div>
         </>
       );
 }

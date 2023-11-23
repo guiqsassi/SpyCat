@@ -1,8 +1,8 @@
-import "./UploadWidgetUser.css"
-import { useDispatch } from "react-redux";
-import React, { useState, useEffect, useRef } from 'react';
 import Axios from "axios";
-import add from "../../images/circle-addRose.png"
+import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import add from "../../images/circle-addRose.png";
+import "./UploadWidgetUser.css";
 const UploadWidgetUser = () => {
     const [file, setFiles] = useState()
     const [resImg, setResImg] = useState()

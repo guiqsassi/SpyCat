@@ -90,7 +90,7 @@ const AddPet = () => {
           images: 
             urlArray.map((url)=>{
               return ({
-                
+                id: 0,
                 url: url,
                 date: date
               })

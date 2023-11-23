@@ -1,6 +1,6 @@
 
 const initialState = {
-    userID: 4,
+    userID: 1,
     logged: false,
     userIconUrl: "https://www.tvpop.com.br/wp-content/uploads/2023/08/celso-russomanno-1024x576.png",
     token: ""

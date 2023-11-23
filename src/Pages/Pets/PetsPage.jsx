@@ -1,28 +1,24 @@
-import "./Pets.css"
-import NavSlide from "../../Components/NavSlide/NavSlide"
-import {useEffect, useState, useRef} from 'react';
-import fav from "../../images/fav.png"
-import Input from "../../Components/Input/Input";
-import ButtonForms from "../../Components/ButtonForms/ButtonForms";
-import UploadWidget from "../../Components/UploadWidged/UploadWidget";
-import "leaflet/dist/leaflet.css"
-import { Marker, Popup} from 'react-leaflet';
-import markerIcon from "../../Components/Map/MarkerIcon";
-import { useSelector } from "react-redux";
 import axios from "axios";
-import Map from "../../Components/Map/Map";
-import { UseSelector } from "react-redux/es/hooks/useSelector";
-import { useSearchParams } from "react-router-dom";
+import "leaflet/dist/leaflet.css";
+import { useEffect, useRef, useState } from 'react';
 import { BiSolidXCircle } from "react-icons/bi";
-import seta from "../../images/seta.png"
-import { useDispatch } from "react-redux";
-import Select from "../../Components/Select/Select";
+import { Marker, Popup } from 'react-leaflet';
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Api from "../../Api/Api";
-import favMarkedIMG from "../../images/favMarked.png"
+import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import Comment from "../../Components/Comment/Comment";
-import { async } from "q";
-import { useNavigate } from "react-router-dom";
+import Input from "../../Components/Input/Input";
+import Map from "../../Components/Map/Map";
+import markerIcon from "../../Components/Map/MarkerIcon";
 import markerIconOng from "../../Components/Map/MarkerOngIcon";
+import NavSlide from "../../Components/NavSlide/NavSlide";
+import Select from "../../Components/Select/Select";
+import UploadWidget from "../../Components/UploadWidged/UploadWidget";
+import fav from "../../images/fav.png";
+import favMarkedIMG from "../../images/favMarked.png";
+import seta from "../../images/seta.png";
+import "./Pets.css";
 
 const PetsPage = ()=>{
     const navigate = useNavigate()
@@ -47,6 +43,10 @@ const PetsPage = ()=>{
     const date = new Date().toJSON();
 
     const {userID} = useSelector(state => state.userReducer)
+    const {url} = useSelector(state => state.petReducer)
+    const { city, state, type, latitude, longitude } = useSelector(
+        (state) => state.mapReducer
+      );
     console.log(userID);
 
 
@@ -136,6 +136,33 @@ const PetsPage = ()=>{
                 status: "RESGATADO"
             }).then((res)=>{
                 navigate("/home")
+            })
+        }
+        const location = {
+            id: 0,
+            latitude: latitude,
+            longitude: longitude,
+            date: date,
+          };
+        const handleClickNewSighting = async()=>{
+            console.log(location)
+            console.log(url);
+            await axios.post(`${Api}/pets/sighting`, {
+                id: pet.id,
+                image:{
+                    id: 0,
+                    url: url,
+                    date: date,
+                    pet: {
+                        id: pet.id
+                    },
+                   
+
+                },
+                location: location
+            }).then((res)=>{
+                getPets()
+                setViewEncounterModal("none")
             })
         }
             
@@ -254,7 +281,7 @@ const PetsPage = ()=>{
             <h2>Avistamento de Pet</h2>
             <UploadWidget></UploadWidget>
             <Map placeMarker={true} findUser={true}></Map>
-                <ButtonForms name="Enviar"></ButtonForms>
+                <ButtonForms onClick={handleClickNewSighting} name="Enviar"></ButtonForms>
             </div>
         </div>
 
