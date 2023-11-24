@@ -9,8 +9,9 @@ import NotificationOkay from "../../Components/Notification/NotificationOkay"
 import emailjs from '@emailjs/browser';
 
 const Suporte = () => {
-    const [notification, setNotification] = useState("off")
-    const [notificationError, setNotificationError] = useState("off")
+    const [notification, setNotification] = useState(false)
+    const [notificationError, setNotificationError] = useState(false)
+    const [errorText, setErrorText] = useState("")
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -23,17 +24,21 @@ const Suporte = () => {
       emailjs.sendForm('service_1ivi5yg', 'template_r3qrv95', form.current, 'Ho6N_yBd1QwlMUZ7K')
         .then((result) => {
             console.log(result.text);
-            setNotification("on")
-            setTimeout(()=>{setNotification("off")}, 7000);   
+
+            setNotification(true)
+            setTimeout(()=>{setNotification(false)}, 7000);   
         }, (error) => {
+            setErrorText("Um erro inesperado ocorreu")
             console.log(error.text);
-            setNotificationError("on")
-            setTimeout(()=>{setNotificationError("off")}, 7000);   
+            setNotificationError(true)
+            setTimeout(()=>{setNotificationError(false)}, 7000);   
         });
     }
     else{
-        setNotificationError("on")
-        setTimeout(()=>{setNotificationError("off")}, 7000);   
+        setNotificationError(true)
+        setErrorText("Insira todos os dados ccorretamente")
+
+        setTimeout(()=>{setNotificationError(false)}, 7000);   
 
     }
 };
@@ -42,7 +47,7 @@ const Suporte = () => {
                 <NavSlide></NavSlide>
 
                 <section className="Suporte">
-                <NotificationError state={notificationError}></NotificationError>
+                <NotificationError text={errorText} state={notificationError}></NotificationError>
             <NotificationOkay state={notification}></NotificationOkay>
         <div className="SupportContainer">
             <div className="imagePaper">

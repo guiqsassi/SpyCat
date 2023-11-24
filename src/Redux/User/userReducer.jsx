@@ -1,6 +1,6 @@
 
 const initialState = {
-    userID: 1,
+    userID: 2,
     logged: false,
     userIconUrl: "https://www.tvpop.com.br/wp-content/uploads/2023/08/celso-russomanno-1024x576.png",
     token: ""
@@ -17,6 +17,9 @@ const userReducer =(state = initialState, action) =>{
     }
     if(action.type === "user/newUrl"){
         return{...state, userIconUrl: action.payload.url}
+    }
+    if(action.type === "user/logOut"){
+        return{...state, userID: 0, logged: false, userIconUrl: "", token: ""}
     }
     return state
 }

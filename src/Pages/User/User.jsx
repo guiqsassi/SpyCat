@@ -11,11 +11,17 @@ import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import UploadWidgetUser from "../../Components/UploadWidgedUser/UploadWidgetUser";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import NotificationError from "../../Components/Notification/NotificationError"
+import NotificationOkay from "../../Components/Notification/NotificationOkay"
 
 
 import axios from "axios";
 import Api from "../../Api/Api";
 const User = () => {
+    const [notification, setNotification] = useState(false)
+    const [notificationError, setNotificationError] = useState(false)
+    const [errorText, setErrorText] = useState("")
+
     const {userIconUrl} = useSelector((state)=>state.userReducer)
     const {userID} = useSelector((state)=> state.userReducer)
     console.log(userID);
@@ -30,6 +36,7 @@ const User = () => {
     const [name, setName] = useState("")    
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
 
     const [deletePassword, setDeletePassword] = useState("")
 
@@ -121,11 +128,19 @@ const User = () => {
 
         }).then((res)=>{
             setDisplay("none")
+            setNotification(true)
+            setTimeout(()=>{setNotification(false)}, 7000);  
             getUser()
+        }).catch((err)=>{
+            setErrorText("Infelizmente houve algum erro interno :(")
+            setNotificationError(true)
+
+            setTimeout(()=>{setNotificationError(false)}, 7000);  
         })
     }
 
     const handleDeleteClick = async()=>{
+        deletePassword?
         await axios(
             {   
                 method: "delete",
@@ -134,12 +149,24 @@ const User = () => {
                     password: deletePassword
                 }
     }).then((res)=>{
+            
             console.log(res);
-        })
+        }).catch((err)=>{
+            setErrorText("Infelizmente houve algum erro interno :(")
+            setNotificationError(true)
+
+            setTimeout(()=>{setNotificationError(false)}, 7000);  
+        }):
+        setErrorText("Escreva sua senha ><")
+            setNotificationError(true)
+
+            setTimeout(()=>{setNotificationError(false)}, 7000);  
     }
     return (
         <>
         <NavSlide/>
+        <NotificationError text={errorText} state={notificationError}></NotificationError>
+        <NotificationOkay state={notification}></NotificationOkay>
         <section className="UserSection">
             <div className="userInformation">
                 
@@ -173,7 +200,7 @@ const User = () => {
                     <div className="petCards" ref={courosel}>
                         {user?
                             user.pet.map((pet)=>{
-                                return <PetView pet={pet} image={pet.images[0]}></PetView>
+                                return <PetView pet={pet} image={pet.images[0].url}></PetView>
                             }) 
                             :
                             null
@@ -227,20 +254,20 @@ const User = () => {
                         <Select label={"Estado"} defaultValue={"Insira o seu estado"} onChange={handleStateSelected} options={ siglasEstadosBrasil}/>
                         <Select dataList={true} list="cidades" label={"Cidade"} defaultValue={"Insira o seu estado"} onChange={(e)=>{setCidade(e.target.value)}} options={ cidades}/>
                     <ButtonForms name="atualizar" onClick={handleUpdateClick}></ButtonForms>
-                    <ButtonForms name="deletar" onClick={handleUpdateClick}></ButtonForms>
+                    <ButtonForms name="deletar" onClick={()=>{ setDeleteModal("flex")}}></ButtonForms>
                     </div> 
                 </div>
             </div>
 
-        <div className="modalDelete">
+        <div className="modalDelete" style={{display: deleteModal}}>
             <div className="deleteModalContainer">
                 <div className="modalDeleteTittle">
                     <h1>Está certo disso?</h1>
                 </div>
-                <div className="inputDelete">
-                    <Input name={"senha"} value={deletePassword} setValue={setDeletePassword}></Input>
+                <div className="inputDelete" >
+                    <Input name={"senha"} password={"password"} value={deletePassword} setValue={setDeletePassword}></Input>
                     <ButtonForms delete={true} onClick={handleDeleteClick} name="confirmar"></ButtonForms>
-                    <ButtonForms name="cancelar"></ButtonForms>
+                    <ButtonForms name="cancelar" onClick={()=>{ setDeleteModal("none")}}></ButtonForms>
                 </div>
             </div>
         </div>

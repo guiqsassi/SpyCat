@@ -8,8 +8,9 @@ import NotificationOkay from "../../../Components/Notification/NotificationOkay"
 import emailjs from '@emailjs/browser';
 
 const Support = ()=>{
-    const [notification, setNotification] = useState("off")
-    const [notificationError, setNotificationError] = useState("off")
+    const [notification, setNotification] = useState(false)
+    const [notificationError, setNotificationError] = useState(false)
+    const [errorText, setErrorText] = useState("")
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -22,21 +23,24 @@ const Support = ()=>{
       emailjs.sendForm('service_1ivi5yg', 'template_r3qrv95', form.current, 'Ho6N_yBd1QwlMUZ7K')
         .then((result) => {
             console.log(result.text);
-            setNotification("on")
-            setTimeout(()=>{setNotification("off")}, 7000);   
+            setNotification(true)
+            setTimeout(()=>{setNotification(true)}, 7000);   
         }, (error) => {
             console.log(error.text);
-            setNotificationError("on")
-            setTimeout(()=>{setNotificationError("off")}, 7000);   
+            setErrorText("Houve algum erro inesperado")
+            setNotificationError(false)
+            setTimeout(()=>{setNotificationError(false)}, 7000);   
         });
     }    else{
+        setErrorText("Escreva todos os dados no formulário")
         setNotificationError("on")
-        setTimeout(()=>{setNotificationError("off")}, 7000);   
+        
+        setTimeout(()=>{setNotificationError(false)}, 7000);   
 
     }};
     return(
         <section className="Support">
-            <NotificationError state={notificationError}></NotificationError>
+            <NotificationError text={errorText} state={notificationError}></NotificationError>
             <NotificationOkay state={notification}></NotificationOkay>
             <div className="SupportContainer">
                 <div className="imagePaper">

@@ -19,8 +19,12 @@ import fav from "../../images/fav.png";
 import favMarkedIMG from "../../images/favMarked.png";
 import seta from "../../images/seta.png";
 import "./Pets.css";
+import NotificationError from "../../Components/Notification/NotificationError"
+import NotificationOkay from "../../Components/Notification/NotificationOkay"
 
 const PetsPage = ()=>{
+    const [notification, setNotification] = useState(false)
+    const [notificationError, setNotificationError] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const imageCollunm = useRef()
@@ -35,6 +39,7 @@ const PetsPage = ()=>{
     const [viewRescueModal, setViewRescueModal] = useState("none")
     const [viewEncounterModal, setViewEncounterModal] = useState("none")
     const [favMarked, setFavMarked] = useState(false)
+    const [errorText, setErrorText] = useState("")
     const [ongs, setOngs] = useState()
     const [data, setData] = useState()
 
@@ -74,6 +79,7 @@ const PetsPage = ()=>{
                 await axios.get(`${Api}/pets/${id}`).then((res)=>{
                     setPet(res.data)
                     setMarker(res.data.locations)
+                    
                     setPosition([res.data.locations[0].latitude, res.data.locations[0].longitude])
                     setBigImage(res.data.images[0].url)
                     setComments(res.data.comments)
@@ -116,6 +122,7 @@ const PetsPage = ()=>{
         }
 
         const handleClickCommentCreate= async()=>{
+            commentText?
             await axios.post(`${Api}/comments`, {
                 user:{ id: userID
                 },
@@ -125,9 +132,20 @@ const PetsPage = ()=>{
                 text: commentText,
                 date: date 
             }).then((res)=>{
+                setNotification(true)
+                setTimeout(()=>{setNotification(false)}, 7000);  
+                setViewEncounterModal("none")
                 console.log(res.data);
+                setCommentText("")
                 getPets()
-            })
+            }).catch((err)=>{
+                setNotificationError(true)
+                setErrorText("Houve um erro com seu comentário")
+                setTimeout(()=>{setNotificationError(false)}, 7000);   
+            }):
+            setNotificationError(true)
+            setTimeout(()=>{setNotificationError(false)}, 7000);   
+            setErrorText("Insira um texto antes de comentário")
 
         }
         const handleClickRescue = async()=>{
@@ -136,7 +154,12 @@ const PetsPage = ()=>{
                 status: "RESGATADO"
             }).then((res)=>{
                 navigate("/home")
-            })
+            }).catch((err)=>{
+                setNotificationError(true)
+                setErrorText("Houve um erro com seu resgate")
+                setTimeout(()=>{setNotificationError(false)}, 7000);  
+            } 
+            )
         }
         const location = {
             id: 0,
@@ -162,7 +185,13 @@ const PetsPage = ()=>{
                 location: location
             }).then((res)=>{
                 getPets()
+                setNotification(true)
+                setTimeout(()=>{setNotification(false)}, 7000);  
                 setViewEncounterModal("none")
+            }).catch((err)=>{
+                setNotificationError(true)
+                setErrorText("Houve um erro com seu envio de Econtro")
+                setTimeout(()=>{setNotificationError(false)}, 7000);  
             })
         }
             
@@ -170,6 +199,8 @@ const PetsPage = ()=>{
         <section className="petsSection">
         
             <NavSlide></NavSlide>
+            <NotificationError text={errorText} state={notificationError}></NotificationError>
+            <NotificationOkay state={notification}></NotificationOkay>
             {pet?
                     <div className="petInfo">
                 <div className="imageSection">

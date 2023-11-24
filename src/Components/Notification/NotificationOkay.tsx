@@ -2,13 +2,13 @@ import "./NotificationOkay.css"
 import {useState } from 'react';
 
 type NotificationProps = {
-    state: string
+    state: Boolean
 }
 
- function NotificationOkay({state}:NotificationProps) {
+ function NotificationOkay(props:NotificationProps) {
     let notification
 
-    if(state == "on"){
+    if(props.state == true){
         notification = "0px"
     }
     else{
@@ -16,7 +16,7 @@ type NotificationProps = {
     }
     return (
         <div className="notificationContainer" style={{transform: `translateX(${notification})`}}>
-            <h2>Email enviado com sucesso 😀 </h2>
+            <h2>Ação realizada com sucesso 😸 </h2>
         </div>
     )
   

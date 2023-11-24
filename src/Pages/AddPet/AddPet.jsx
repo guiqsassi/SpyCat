@@ -13,7 +13,7 @@ import Select from "../../Components/Select/Select";
 import Api from "../../Api/Api";
 import Map from "../../Components/Map/Map";
 import { image } from "@cloudinary/url-gen/qualifiers/source";
-
+import NotificationError from "../../Components/Notification/NotificationError";
 const AddPet = () => {
   const navigate = useNavigate();
 
@@ -25,6 +25,8 @@ const AddPet = () => {
   const [telefone, setTelefone] = useState("");
   const [status, setStatus] = useState("");
   const [view, setView] = useState("");
+  const [notificationError, setNotificationError] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   const [urlArray, setUrlArray] = useState([
     "http://res.cloudinary.com/guiqsassi/image/upload/v1700584660/gmyqcfo6rmseorwkmtjo.png",
@@ -101,6 +103,12 @@ const AddPet = () => {
         })
         .then((res) => {
           console.log(res.data);
+          navigate("/home");
+        }).catch((err)=>{
+          console.log(err.text);
+          setNotificationError(true)
+          setTimeout(()=>{setNotificationError(false)}, 7000);  
+          setErrorText("Houve algum erro com seu envio") 
         });
     }
     
@@ -132,9 +140,21 @@ const AddPet = () => {
       })
       .then((res) => {
         console.log(res.data);
+        navigate("/home");
+      }).catch((err)=>{
+        console.log(err.text);
+        setNotificationError(true)
+        setTimeout(()=>{setNotificationError(false)}, 7000);  
+        setErrorText("Houve algum erro com seu envio") 
       });
     }
-    // navigate("/home");
+    else{
+      setNotificationError(true)
+      setTimeout(()=>{setNotificationError(false)}, 7000);  
+      setErrorText("Insira todas as informações") 
+
+    }
+  
   };
   const handleClickDeletePetImage = (Image)=>{
     console.log(Image);
@@ -146,6 +166,7 @@ const AddPet = () => {
 
   return (
     <section className="addPet">
+      <NotificationError text={errorText} state={notificationError}></NotificationError>
       <NavSlide></NavSlide>
       <div className="petCreateContainer">
         <div className="banner">

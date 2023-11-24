@@ -5,18 +5,22 @@ import { Link, useNavigate } from "react-router-dom"
 import Api from "../../Api/Api"
 import ButtonForms from "../../Components/ButtonForms/ButtonForms"
 import Input from "../../Components/Input/Input"
+import NotificationError from "../../Components/Notification/NotificationError";
+
 import "./Login.css"
 const Login = () =>{
     const [error, setError] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [notificationError, setNotificationError] = useState(false)
+    const [errorText, setErrorText] = useState("")
     
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>)=>{
         e.preventDefault()
-
+        if(email !== "" && password !== ""){
         axios.post(`${Api}/login`, {
             email: email,
             password: password
@@ -34,14 +38,25 @@ const Login = () =>{
             localStorage.setItem("token", res.data.token)
             navigate("/home")
         }).catch((err)=>{
+            setErrorText("Informações inseridas erradas")
+            setNotificationError(true)
+            setTimeout(()=>{setNotificationError(false)}, 7000);  
             setError(true)
-        })
+        })}
+        else{
+            setErrorText("Insira todos os campos")
+            setNotificationError(true)
+            setTimeout(()=>{setNotificationError(false)}, 7000);  
+            setError(true)
+        }
 
         
     }
 
     return(
         <section className="Login">
+                        <NotificationError state={notificationError} text={errorText}></NotificationError>
+
         <div className="imageBg">
 
         </div>

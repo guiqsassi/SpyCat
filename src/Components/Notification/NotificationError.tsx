@@ -2,13 +2,14 @@ import "./NotificationError.css"
 import {useState } from 'react';
 
 type NotificationProps = {
-    state: string
+    state: boolean,
+    text: String
 }
 
- function NotificationError({state}:NotificationProps) {
+ function NotificationError(props:NotificationProps) {
     let notification
 
-    if(state == "on"){
+    if(props.state){
         notification = "0px"
     }
     else{
@@ -16,7 +17,7 @@ type NotificationProps = {
     }
     return (
         <div className="notificationErrorContainer" style={{transform: `translateX(${notification})`}}>
-            <h2>Infelizmente houve algum erro com seu envio :( </h2>
+            <h2>{props.text} </h2>
         </div>
     )
   

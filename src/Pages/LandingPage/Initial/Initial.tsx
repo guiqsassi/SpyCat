@@ -11,7 +11,7 @@ const Initial = () => {
                 <p>Encontre pets abandonados ou perdidos e compartilhe para que outras pessoas também possam ajuda-los!!!</p>
                 <div className="buttons">
                     <button>Cadastre-se</button>
-                    <button className="about">Contate-nos</button>
+                    <button className="about"> <a href="">  Contate-nos</a></button>
                     
                 </div>
             </div>

@@ -10,9 +10,9 @@ import logOut from "../../images/logOut.png"
 import config from "../../images/config.png"
 import add from "../../images/add.png"
 import { useNavigate } from "react-router-dom";
-import { UseSelector } from "react-redux/es/hooks/useSelector";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Redux/rootReducer";
+
 
 type NavProps = {
     image?: string,
@@ -20,6 +20,7 @@ type NavProps = {
 }
 
 const NavSlide = (props:NavProps)=>{
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [slideView, setSlideView] = useState("-50vh")
 
@@ -47,11 +48,14 @@ const NavSlide = (props:NavProps)=>{
         <BiMap size={35} color="#F98AAE"></BiMap>
         <p>Florianópolis - Sc</p>
         </div>
+    
+
         {userIconUrl? 
-        <img src={userIconUrl} className="userIcon" alt="" />    
+        <img onClick={()=>{ navigate(`/User?id=${userID}`)}} src={userIconUrl} style={{cursor: "pointer"}} className="userIcon" alt="" />    
     :
     <BiUserCircle size={40} color="#F98AAE"></BiUserCircle>
     
+
     }
         </div>
         </header>
@@ -94,7 +98,11 @@ const NavSlide = (props:NavProps)=>{
 
                     </li>
                     <li>
-                    <NavLink className={"navSlide"} to={"/"}>
+                    <NavLink onClick={()=>{
+                        dispatch({
+                            type: "user/loggout"
+                        })
+                    }} className={"navSlide"} to={"/"}>
 
                     <img src={logOut}/>
                     <p>LogOut</p>
