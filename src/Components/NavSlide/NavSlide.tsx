@@ -34,6 +34,8 @@ const NavSlide = (props:NavProps)=>{
 }
 
     const userID = useSelector((state: RootState) => state.userReducer.userID);
+    
+    const logged = useSelector((state: RootState) => state.userReducer.logged);
     const userIconUrl = useSelector((state: RootState) => state.userReducer.userIconUrl)
     
     return (
@@ -49,11 +51,12 @@ const NavSlide = (props:NavProps)=>{
         <p>Florianópolis - Sc</p>
         </div>
     
-
-        {userIconUrl? 
-        <img onClick={()=>{ navigate(`/User?id=${userID}`)}} src={userIconUrl} style={{cursor: "pointer"}} className="userIcon" alt="" />    
-    :
-    <BiUserCircle size={40} color="#F98AAE"></BiUserCircle>
+{logged?
+userIconUrl? 
+<img onClick={()=>{ navigate(`/User?id=${userID}`)}} src={userIconUrl} style={{cursor: "pointer"}} className="userIcon" alt="" />    
+:
+<BiUserCircle onClick={()=>{ navigate(`/User?id=${userID}`)}} size={40} color="#F98AAE" style={{cursor: "pointer"}} ></BiUserCircle>
+:null
     
 
     }
@@ -69,15 +72,19 @@ const NavSlide = (props:NavProps)=>{
                         </NavLink>
                         
                     </li>
-
+                    {logged?
+                    
                     <li>
                     <NavLink className={"navSlide"} to={"/addPet"}>
-
+            
                         <img src={add}/>
                         <p>Adcionar Pet</p>
                         </NavLink>
 
-                    </li>
+                    </li>: null
+                
+                
+                }
                     <li>
                     <NavLink className={"navSlide"} to={"/suporte"}>
                         <img src={suporte}/>
@@ -100,7 +107,7 @@ const NavSlide = (props:NavProps)=>{
                     <li>
                     <NavLink onClick={()=>{
                         dispatch({
-                            type: "user/loggout"
+                            type: "user/logOut"
                         })
                     }} className={"navSlide"} to={"/"}>
 

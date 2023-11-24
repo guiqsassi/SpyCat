@@ -154,6 +154,7 @@ font-weight: 600;
     /* align-items: center; */
     flex-wrap:wrap;
     flex-direction: row;
+    padding-bottom: 50px;
 
 }
 

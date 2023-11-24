@@ -11,9 +11,14 @@ const Nav = ()=>{
             <div className="nav">
                 <ul>
                     <li>
+                    <NavLink className={"navLink"} to={"/home"}>
+
                         Inicio
+                        </NavLink>
+
                     </li>
                     <li>
+                        <a href="#About"></a>
                         Sobre nós
                     </li>
                     <li>

@@ -48,6 +48,7 @@ const PetsPage = ()=>{
     const date = new Date().toJSON();
 
     const {userID} = useSelector(state => state.userReducer)
+    const {logged} = useSelector(state => state.userReducer)
     const {url} = useSelector(state => state.petReducer)
     const { city, state, type, latitude, longitude } = useSelector(
         (state) => state.mapReducer
@@ -101,11 +102,7 @@ const PetsPage = ()=>{
                 })
         }
         const getOngs = async ()=>{
-            await axios.get(`${Api}/ongs`, {
-                headers:{
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
-                }
-            }).then((res)=>{
+            await axios.get(`${Api}/ongs`).then((res)=>{
                 setOngs(res.data)
                 
                 console.log(res.data);
@@ -299,8 +296,14 @@ const PetsPage = ()=>{
                         <div className="campoTexto">{data? data: null}</div>    
                         </div>
                     </div>
-                        <ButtonForms onClick={handleModalRescueClick} name="Resgatar Pet"></ButtonForms>
-                        <ButtonForms onClick={handleViewEncounterModal}  name="Atualizar Encontro"></ButtonForms>
+                       {
+                       logged?
+                       <>
+                       
+                       <ButtonForms onClick={handleModalRescueClick} name="Resgatar Pet"></ButtonForms>
+                        <ButtonForms onClick={handleViewEncounterModal}  name="Atualizar Encontro"></ButtonForms> 
+                       </>
+                        : null}
                 </div>
             </div>:
             null
@@ -310,11 +313,14 @@ const PetsPage = ()=>{
                 <div className="tittleComentarios">
                     <h3>Comentários</h3>
                 </div>
-                <div className="input">
+
+       {logged?
+        <div className="input">
                 <label>Compartilhe suas descobertas!!</label>
                 <Input textArea={true} value={commentText} setValue={setCommentText} placeholder="sua mensagem"></Input>
                 <ButtonForms name="Enviar" onClick={handleClickCommentCreate}></ButtonForms>
                 </div>
+               : null }
                 <div className="Comments">
                 {comments?
                 comments.map((comment)=>{

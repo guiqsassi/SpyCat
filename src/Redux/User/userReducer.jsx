@@ -19,7 +19,8 @@ const userReducer =(state = initialState, action) =>{
         return{...state, userIconUrl: action.payload.url}
     }
     if(action.type === "user/logOut"){
-        return{...state, userID: 0, logged: false, userIconUrl: "", token: ""}
+        localStorage.setItem("token", "")
+        return{...state, userID: 0, logged: false, userIconUrl: "", token: "", userID: 0}
     }
     return state
 }

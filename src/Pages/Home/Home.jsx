@@ -5,24 +5,50 @@ import Button from "../../Components/Button/Button"
 import filter from "../../images/filter.png"
 import PetView from "../../Components/PetView/PetView"
 import "./Home.css"
-import { UseSelector } from "react-redux/es/hooks/useSelector"
 import {useEffect, useState} from 'react';
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import Api from "../../Api/Api"
+import { useSelector } from "react-redux"
 const Home = ()=>{
-
+    const {logged} = useSelector((state)=>state.userReducer)
+    console.log(logged);
     const [pets, setPets] = useState([{}])
+    const [page, setPages]= useState(0)
     const navigate = useNavigate()
+    const getPets = async()=>{
+        axios.get(Api+ "/pets", {
+            params:{
+                page: page,
+                size: 10,
+                sort: "color"
+            }
+        }).then((res)=> {
+            setPets( [...pets, ...res.data] )
+             console.log(res.data);
+            })
+    }
     
     useEffect(
         ()=>{
-            axios.get(Api+ "/pets").then((res)=> {
-                setPets(res.data)
-                 console.log(res.data);
-                })
+            getPets()
         }
-    ,[])
+    ,[page])
+    useEffect(
+        ()=>{
+            window.addEventListener("scroll", handleScroll)
+            
+            return()=> window.removeEventListener("scroll", handleScroll)
+        }
+        ,
+    )
+    function handleScroll(){
+        if(window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight){
+            return console.log("deu por hj");;
+        }
+        setPages(page + 1)
+
+    }
     return(
         <section className="Home">
             <NavSlide></NavSlide>
@@ -39,9 +65,11 @@ const Home = ()=>{
                             <p>{pets.length} animais</p>
                         </div>
                         <div className="cadNewPet">
+                           {logged?
                             <button onClick={()=>{
                                 navigate("/addPet")
-                            }}> Cadastrar novo pet</button>
+                            }}> Cadastrar novo pet</button>:null}
+
                         </div>
                     </div>
                 </div>

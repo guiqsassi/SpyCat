@@ -43,7 +43,7 @@ const User = () => {
 
     const couroselfav = useRef(null)
     const courosel = useRef(null)
-    const [user, setUser] = useState()
+    const [user, setUser] = useState({ pet:[]})
 
         const getUser = async()=>{
         await axios(
@@ -203,6 +203,9 @@ const User = () => {
             </div>
             <div className="userPets">
                 <div className="carrosels">
+
+{                
+                    user.pet[0]?
                     <div className="PetsCarrosel">
                     <div className="tittlePets">
                     <h3>Meus pets</h3>
@@ -224,6 +227,8 @@ const User = () => {
 
                     </div>
                     </div>
+                    :null
+                    }
                     <div className="PetsCarrosel">
                     <div className="tittlePets">
                     <h3>Pets Favoritos</h3>
