@@ -39,7 +39,7 @@ const Support = ()=>{
 
     }};
     return(
-        <section className="Support">
+        <section className="Support" id="support">
             <NotificationError text={errorText} state={notificationError}></NotificationError>
             <NotificationOkay state={notification}></NotificationOkay>
             <div className="SupportContainer">

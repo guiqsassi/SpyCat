@@ -179,3 +179,11 @@ line-height: normal;
     justify-content: center;
     gap: 20px;
 }
+@media(max-Width: 1000px){
+    .modalContainerUser{
+        width: 80%;
+    }
+    .PetsCarrosel{
+        width: 90%;
+    }
+}

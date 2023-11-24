@@ -69,6 +69,7 @@ line-height: 131.523%; /* 24.989px */
     color: white;
     width: 70%;
     font-size: 16px;
+    min-width: 100px;
 }
 main{
     width: 100%;
@@ -174,5 +175,44 @@ font-weight: 600;
 @media (max-height: 800px){
     .tittle h1{
         font-size: 40px;
+        margin-top: 10px;
     }
+   
+}
+@media (max-width: 1000px){
+    .infoZone .filterByData{
+        /* min-width: 300px; */
+    }
+    .cadNewPet{
+        width: 40%;
+    }
+    .filter{
+        display: none;
+    }
+    .pets{
+        padding: 20px;
+        width: 100%;
+    }
+ 
+}
+@media (max-width: 800px){
+
+    .petsCounter{
+        display: none;
+    }
+    .campoSelect{
+        width: 150px;
+    }
+    .tittle h1{
+        font-size: 30px;
+        margin-top: 10px;
+
+    }
+ 
+}
+@media (max-width: 600px){
+    .infoZone{
+        justify-content: space-around;
+    }
+ 
 }

@@ -18,8 +18,10 @@ const Nav = ()=>{
 
                     </li>
                     <li>
-                        <a href="#About"></a>
+                        <a href="#about">
+
                         Sobre nós
+                        </a>
                     </li>
                     <li>
                         <NavLink className={"navLink"} to={"/login"}>

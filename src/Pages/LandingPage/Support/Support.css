@@ -83,6 +83,15 @@ line-height: normal;
         height: 350px;
     }
     .SupportContainer{
-        width: 90%;
+        width: 100%;
+    }
+}
+@media (max-width: 700px) {
+    .SupportContainer{
+        width: 100%;
+        flex-direction: column;
+    }
+    .Support{
+        height: 100%;
     }
 }

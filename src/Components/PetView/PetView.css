@@ -32,15 +32,25 @@
     align-items: center;
     justify-content: center;
     border-radius: 0 0px 9px 9px;
-border: 1px solid rgba(255, 255, 255, 0.10);
-background: rgba(255, 178, 203, 0.50);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 178, 203, 0.50);
 }
 .viewMore p{
     color: #F98AAE;
-font-family: Rowdies;
-font-size: 18px;
-font-style: normal;
-margin: 0;
-font-weight: 400;
-line-height: normal;
+    font-family: Rowdies;
+    font-size: 18px;
+    font-style: normal;
+    margin: 0;
+    font-weight: 400;
+    line-height: normal;
+}
+@media (max-width: 600px) {
+    .petContainer{
+        min-width: 175px;
+        min-height: 125px;
+    }
+    .petImage{
+        min-width: 175px;
+        min-height: 125px;
+    }
 }

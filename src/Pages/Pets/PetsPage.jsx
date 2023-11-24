@@ -337,8 +337,11 @@ const PetsPage = ()=>{
             <div className="NewEnconterModalContainer">
             <BiSolidXCircle size={30} onClick={handleViewEncounterModal} color="F98AAE" className="close"></BiSolidXCircle>
             <h2>Avistamento de Pet</h2>
+            <div className="petInputs">
             <UploadWidget></UploadWidget>
             <Map placeMarker={true} findUser={true}></Map>
+
+            </div>
                 <ButtonForms onClick={handleClickNewSighting} name="Enviar"></ButtonForms>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents } from 're
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
 import { useDispatch } from "react-redux"
+import 'leaflet/dist/leaflet.css';
 import PlaceMarkerOnClick from './PlaceMarkerOnClick';
 import axios from 'axios';
 import { Children } from 'react';

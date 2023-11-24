@@ -5,7 +5,7 @@ import GatoCome from "../../../images/GatoCome.png"
 import prancheta from "../../../images/prancheta.png"
 const About = ()=>{
     return(
-        <section className="About">
+        <section className="About" id="about">
             <div className="Banner">
                 <ul>
                     <li>

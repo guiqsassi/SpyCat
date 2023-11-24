@@ -126,3 +126,11 @@ line-height: normal;
     margin: 20px;
     border-radius: 10px;
 }
+@media(max-width: 500px){
+    .localization{
+        display: none;
+    }
+    .userOptions{
+        min-width: 0px;
+    }
+}
