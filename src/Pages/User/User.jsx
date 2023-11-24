@@ -24,7 +24,8 @@ const User = () => {
 
     const {userIconUrl} = useSelector((state)=>state.userReducer)
     const {userID} = useSelector((state)=> state.userReducer)
-    console.log(userID);
+    const {token} = useSelector((state)=> state.userReducer)
+    console.log(token);
     const [deleteModal, setDeleteModal] = useState("none")
     const [searchParams] = useSearchParams()
     const [estado, setEstado] = useState()
@@ -45,7 +46,15 @@ const User = () => {
     const [user, setUser] = useState()
 
         const getUser = async()=>{
-        await axios.get(`${Api}/users/${id}`).then((res)=>{
+        await axios(
+            {
+                method: "get",
+                url:`${Api}/users/${id}`,
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            }
+            ).then((res)=>{
             console.log(res.data);
             setEmail(res.data.email);
             setName(res.data.username)
@@ -125,8 +134,10 @@ const User = () => {
             state: estado,
             icon: userIconUrl,
             password: password
+        }, {headers:{ 
+            Authorization: `Bearer ${localStorage.getItem("token")}`
 
-        }).then((res)=>{
+        }}).then((res)=>{
             setDisplay("none")
             setNotification(true)
             setTimeout(()=>{setNotification(false)}, 7000);  
@@ -147,6 +158,9 @@ const User = () => {
                 url:`${Api}/users/${userID}`,
                 params: {
                     password: deletePassword
+                },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
     }).then((res)=>{
             

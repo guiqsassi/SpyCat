@@ -37,6 +37,8 @@ const Login = () =>{
             })
             localStorage.setItem("token", res.data.token)
             navigate("/home")
+            console.log(res.data);
+            
         }).catch((err)=>{
             setErrorText("Informações inseridas erradas")
             setNotificationError(true)

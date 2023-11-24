@@ -24,7 +24,6 @@ const Cadastro = ()=>{
     const handleClickRegister = async()=>{
       if(name !== "" && email !== "" && password !==""){
       await axios.post(`${Api}/users`,{
-      id: 0,
       username: name,
       email: email,
       password: password

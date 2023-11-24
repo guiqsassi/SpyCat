@@ -80,8 +80,11 @@ const AddPet = () => {
     {
       console.log(urlArray)
 
-      await axios
-        .post(`${Api}/pets`, {
+      await axios(
+        {
+        method: "post",
+        url: `${Api}/pets`, 
+        data: {
           id: 0,
           description: description,
           color: Cor,
@@ -100,7 +103,12 @@ const AddPet = () => {
           ,
           status: status.toUpperCase(),
           user:{ id: userID}
-        })
+        },       
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+        )
         .then((res) => {
           console.log(res.data);
           navigate("/home");
@@ -124,7 +132,11 @@ const AddPet = () => {
       telefone !== ""
     ){
       await axios
-      .post(`${Api}/lostPets`, {
+      (
+        {
+          method: "post",
+          url: `${Api}/lostPets`, 
+        data: {
         id: 0,
         description: description,
         color: Cor,
@@ -137,7 +149,12 @@ const AddPet = () => {
         user:{ id: 2},
         phone: telefone,
         email: email
-      })
+      },
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }
+      )
       .then((res) => {
         console.log(res.data);
         navigate("/home");

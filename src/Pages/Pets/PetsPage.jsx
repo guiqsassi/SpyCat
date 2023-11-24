@@ -101,7 +101,11 @@ const PetsPage = ()=>{
                 })
         }
         const getOngs = async ()=>{
-            await axios.get(`${Api}/ongs`).then((res)=>{
+            await axios.get(`${Api}/ongs`, {
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            }).then((res)=>{
                 setOngs(res.data)
                 
                 console.log(res.data);
@@ -131,7 +135,13 @@ const PetsPage = ()=>{
                 },
                 text: commentText,
                 date: date 
-            }).then((res)=>{
+            },
+            {headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+
+            }}
+            
+            ).then((res)=>{
                 setNotification(true)
                 setTimeout(()=>{setNotification(false)}, 7000);  
                 setViewEncounterModal("none")
@@ -152,7 +162,14 @@ const PetsPage = ()=>{
             await axios.post(`${Api}/pets/rescue`, {
                 id: pet.id,
                 status: "RESGATADO"
-            }).then((res)=>{
+            },{
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+
+                }
+            }
+            
+            ).then((res)=>{
                 navigate("/home")
             }).catch((err)=>{
                 setNotificationError(true)
@@ -183,7 +200,11 @@ const PetsPage = ()=>{
 
                 },
                 location: location
-            }).then((res)=>{
+            },
+            {headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+
+            }}).then((res)=>{
                 getPets()
                 setNotification(true)
                 setTimeout(()=>{setNotification(false)}, 7000);  

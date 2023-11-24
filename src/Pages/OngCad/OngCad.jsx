@@ -38,13 +38,22 @@ const OngCad = () => {
             date: date,
           };
         if(cnpj != "" && telefone != "" && email != "" && nomeFantasia != "" && location.latitude != 0)
-        axios.post(`${Api}/ongs`, {
+        axios(
+        
+{   method: "post",  
+    url: `${Api}/ongs`, 
+      data: {
             tradingName: nomeFantasia,
             cnpj: cnpj,
             email: email,
             phone: telefone,
             location: location
-        }).then((res)=>{ 
+        },
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+      }
+        ).then((res)=>{ 
             console.log(res);
         }
         
