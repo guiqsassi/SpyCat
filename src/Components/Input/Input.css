@@ -78,13 +78,13 @@ line-height: 131.523%; /* 24.989px */
     margin: 0 10px 0 10px;
 }
 .campoInput textarea::placeholder{
-    color: #000;
+    color: #00000075;
 font-family: Open Sans;
 /* font-size: 19px; */
 font-style: normal;
 }
 .campoInput input::placeholder{
-    color: #000;
+    color: #00000075;
 font-family: Open Sans;
 /* font-size: 19px; */
 font-style: normal;
