@@ -28,10 +28,7 @@ const AddPet = () => {
   const [notificationError, setNotificationError] = useState(false);
   const [errorText, setErrorText] = useState("");
 
-  const [urlArray, setUrlArray] = useState([
-    "http://res.cloudinary.com/guiqsassi/image/upload/v1700584660/gmyqcfo6rmseorwkmtjo.png",
-    "http://res.cloudinary.com/guiqsassi/image/upload/v1700584712/pgy1uqncyy7wjv4mspho.png"
-]);
+  const [urlArray, setUrlArray] = useState([]);
 
   const { city, state, type, latitude, longitude } = useSelector(
     (state) => state.mapReducer
