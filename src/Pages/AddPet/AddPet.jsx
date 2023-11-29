@@ -124,7 +124,7 @@ const AddPet = () => {
       description !== "" &&
       Cor !== "" &&
       especie !== "" &&
-      status !== "Perdido" &&
+      status == "Perdido" &&
       email !== "" &&
       telefone !== ""
     ){
@@ -141,9 +141,16 @@ const AddPet = () => {
         city: city,
         state: state,
         location: location,
-        images: urlArray,
+        images: 
+        urlArray.map((url)=>{
+          return ({
+            id: 0,
+            url: url,
+            date: date
+          })
+        }),
         status: status.toUpperCase(),
-        user:{ id: 2},
+        user:{ id: userID},
         phone: telefone,
         email: email
       },
