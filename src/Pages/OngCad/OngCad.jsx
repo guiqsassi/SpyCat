@@ -48,10 +48,7 @@ const OngCad = () => {
             email: email,
             phone: telefone,
             location: location
-        },
-      headers:{
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
+        }
       }
         ).then((res)=>{ 
             console.log(res);

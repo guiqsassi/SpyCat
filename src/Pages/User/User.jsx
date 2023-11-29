@@ -9,8 +9,8 @@ import Input from "../../Components/Input/Input";
 import Select from "../../Components/Select/Select";
 import ButtonForms from "../../Components/ButtonForms/ButtonForms";
 import UploadWidgetUser from "../../Components/UploadWidgedUser/UploadWidgetUser";
-import { useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import NotificationError from "../../Components/Notification/NotificationError"
 import NotificationOkay from "../../Components/Notification/NotificationOkay"
 
@@ -18,6 +18,8 @@ import NotificationOkay from "../../Components/Notification/NotificationOkay"
 import axios from "axios";
 import Api from "../../Api/Api";
 const User = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [notification, setNotification] = useState(false)
     const [notificationError, setNotificationError] = useState(false)
     const [errorText, setErrorText] = useState("")
@@ -163,7 +165,10 @@ const User = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
     }).then((res)=>{
-            
+            dispatch({
+                type: "user/logOut"
+            })
+            navigate("/")
             console.log(res);
         }).catch((err)=>{
             setErrorText("Infelizmente houve algum erro interno :(")
