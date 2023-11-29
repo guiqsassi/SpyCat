@@ -51,6 +51,7 @@ const OngCad = () => {
         }
       }
         ).then((res)=>{ 
+            navigate("/")
             console.log(res);
         }
         
