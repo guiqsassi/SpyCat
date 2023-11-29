@@ -17,6 +17,12 @@ const petReducer =(state = initialState, action) =>{
             pet: action.payload.pet
         }
     }
+    if(action.type == "clear"){
+        return{
+            ...state,
+            url: ""
+        }
+    }
     return state
 }
 

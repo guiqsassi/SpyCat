@@ -8,7 +8,7 @@ import { BiSolidXCircle } from "react-icons/bi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ButtonForms from "../../Components/ButtonForms/ButtonForms";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Select from "../../Components/Select/Select";
 import Api from "../../Api/Api";
 import Map from "../../Components/Map/Map";
@@ -16,7 +16,7 @@ import { image } from "@cloudinary/url-gen/qualifiers/source";
 import NotificationError from "../../Components/Notification/NotificationError";
 const AddPet = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [markerPosition, setMarkerPosition] = useState(null);
   const [description, setDescription] = useState("");
   const [especie, setEspecie] = useState("");
@@ -109,6 +109,9 @@ const AddPet = () => {
         .then((res) => {
           console.log(res.data);
           navigate("/home");
+          dispatch({
+            type: "clear"
+          })
         }).catch((err)=>{
           console.log(err.text);
           setNotificationError(true)
@@ -162,6 +165,9 @@ const AddPet = () => {
       .then((res) => {
         console.log(res.data);
         navigate("/home");
+        dispatch({
+          type: "clear"
+        })
       }).catch((err)=>{
         console.log(err.text);
         setNotificationError(true)

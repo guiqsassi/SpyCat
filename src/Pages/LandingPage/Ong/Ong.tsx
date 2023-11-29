@@ -1,6 +1,7 @@
 import "./Ong.css"
 import Button from "../../../Components/Button/Button"
 import OngImage from "../../../images/OngImage.png"
+import { Link } from "react-router-dom"
 
 
 const Ong = ()=>{
@@ -15,7 +16,7 @@ const Ong = ()=>{
                 <h1>Cadastre sua ONG!!</h1>
                 <p>Entre em contato conosco e cadastre sua ONG para aparecer nos mapas de nossos serviços!!</p>
                     <div className="buttons">
-                        <button>Saiba mais</button>
+                        <button><Link to={"/ongCad"}>Saiba mais</Link></button>
                     </div>
                 </div>
                 </div>

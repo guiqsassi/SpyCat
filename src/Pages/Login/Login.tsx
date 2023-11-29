@@ -65,7 +65,7 @@ const Login = () =>{
         <div className="LoginForm">
         <h2>Entre na sua conta!!</h2>
         <form action="">
-            <Input error={error} icon={"https://i.postimg.cc/8CV7NZSr/Vector.png"} placeholder="Email" value={email} setValue={setEmail} name={"Nome"}></Input>
+            <Input error={error} icon={"https://i.postimg.cc/8CV7NZSr/Vector.png"} placeholder="Email" value={email} setValue={setEmail} name={"Email"}></Input>
             <Input error={error} password="password" placeholder="Senha" icon={"https://i.postimg.cc/MKNcrW35/cadeado.png"} value={password} setValue={setPassword} name={"Senha"}></Input>
                 <p>Esqueceu sua senha? <Link to={"/forget-password"}>Clique aqui</Link></p>
             <div className="button">

@@ -78,7 +78,7 @@ userIconUrl?
                     <NavLink className={"navSlide"} to={"/addPet"}>
             
                         <img src={add}/>
-                        <p>Adcionar Pet</p>
+                        <p>Adicionar Pet</p>
                         </NavLink>
 
                     </li>: null

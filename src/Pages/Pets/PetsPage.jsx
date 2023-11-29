@@ -206,6 +206,9 @@ const PetsPage = ()=>{
                 setNotification(true)
                 setTimeout(()=>{setNotification(false)}, 7000);  
                 setViewEncounterModal("none")
+                dispatch({
+                    type: "clear"
+                  })
             }).catch((err)=>{
                 setNotificationError(true)
                 setErrorText("Houve um erro com seu envio de Econtro")
